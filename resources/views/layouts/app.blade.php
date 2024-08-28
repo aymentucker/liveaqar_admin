@@ -3,11 +3,13 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>{{ config('app.name', 'Laravel') }}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title', 'Admin & Dashboard Template')</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesdesign" name="author" />
+    <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
 
     <!-- Bootstrap Css -->
@@ -17,32 +19,32 @@
     <!-- App Css-->
     <link href="{{ asset('assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
 
-    @yield('styles')
+    @stack('styles')
 </head>
 
 <body>
+    <div id="layout-wrapper">
+        @include('layouts.navbar')
+        @include('layouts.sidebar')
 
-    <!-- Navigation bar, sidebar, etc. -->
-    @include('layouts.navbar')
-    @include('layouts.sidebar')
-
-    <!-- Main content -->
-    <div class="main-content">
-        @yield('content')
+        <div class="main-content">
+            <div class="page-content">
+                <div class="container-fluid">
+                    @yield('content')
+                </div>
+            </div>
+            @include('layouts.footer')
+        </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <p class="text-center">© <script>document.write(new Date().getFullYear())</script> webadmin. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesdesign</p>
-    </footer>
-
-    <!-- JAVASCRIPT -->
+    <!-- JavaScript -->
     <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/libs/metismenujs/metismenujs.min.js') }}"></script>
     <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
     <script src="{{ asset('assets/libs/eva-icons/eva.min.js') }}"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
 
-    @yield('scripts')
+    @stack('scripts')
 </body>
 
 </html>

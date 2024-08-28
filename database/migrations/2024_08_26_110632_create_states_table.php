@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('states', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('name_en');
+
             $table->string('image')->nullable();
 
             $table->foreignId('city_id')->constrained('cities')->onDelete('cascade');

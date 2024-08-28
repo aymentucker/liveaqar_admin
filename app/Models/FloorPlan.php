@@ -12,6 +12,8 @@ class FloorPlan extends Model
         'property_id',
         'title',
         'description',
+        'title_en',
+        'description_en',
         'bedrooms',
         'bathrooms',
         'price',

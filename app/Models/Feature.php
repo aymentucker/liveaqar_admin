@@ -10,6 +10,6 @@ class Feature extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'name','name_en',
     ];
 }

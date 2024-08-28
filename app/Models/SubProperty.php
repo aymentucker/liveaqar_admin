@@ -12,6 +12,8 @@ class SubProperty extends Model
         'property_id',
         'title',
         'description',
+        'title_en',
+        'description_en',
         'price',
         'bedrooms',
         'bathrooms',

@@ -15,7 +15,7 @@
             <div class="card-body p-4">
                 <div class="text-center mt-2">
                     <h5>Register Account</h5>
-                    <p class="text-muted">Get your free webadmin account now.</p>
+                    <p class="text-muted">Get your account now.</p>
                 </div>
                 <div class="p-2 mt-4">
                     <!-- Registration Form -->
@@ -32,12 +32,12 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label" for="username">Username</label>
+                            <label class="form-label" for="name">name</label>
                             <div class="position-relative input-custom-icon">
-                                <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" value="{{ old('username') }}" required>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" value="{{ old('name') }}" required>
                                 <span class="bx bx-user"></span>
                             </div>
-                            <x-input-error :messages="$errors->get('username')" class="mt-2" />
+                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
 
                         <div class="mb-3">

@@ -11,6 +11,8 @@ class AdditionalFeature extends Model
     protected $fillable = [
         'property_id',
         'feature_name',
+        'feature_name_en',
+
         'feature_value',
     ];
 

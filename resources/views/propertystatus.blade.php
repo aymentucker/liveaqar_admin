@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'User List')
+@section('title', 'Property Statuses List')
 
 @section('content')
     <div class="row align-items-center">
         <div class="col-md-6">
             <div class="mb-3">
-                <h5 class="card-title">Contact List <span class="text-muted fw-normal ms-2">(834)</span></h5>
+                <h5 class="card-title">Property Status List <span class="text-muted fw-normal ms-2">(834)</span></h5>
             </div>
         </div>
 
@@ -33,15 +33,13 @@
                                             <label class="form-check-label" for="contacusercheck"></label>
                                         </div>
                                     </th>
+                                    <th scope="col">ID</th>
                                     <th scope="col">Name</th>
-                                    <th scope="col">Role</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Phone</th>
                                     <th scope="col" style="width: 200px;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $user)
+                                @foreach ($propertystatus as $propertystatus)
                                     <tr>
                                         <th scope="row" class="ps-4">
                                             <div class="form-check font-size-16">
@@ -52,14 +50,12 @@
                                         <td>
                                             <img src="{{ asset('assets/images/users/avatar-8.jpg') }}" alt=""
                                                 class="avatar rounded-circle img-thumbnail me-2">
-                                            <a href="#" class="text-body">{{ $user->name }}</a>
+                                            <a href="#" class="text-body">{{ $propertystatus->id }}</a>
                                         </td>
                                         <td>
                                             <span
-                                                class="badge bg-primary-subtle text-primary mb-0">{{ $user->role }}</span>
+                                                class="badge bg-primary-subtle text-primary mb-0">{{ $propertystatus->name }}</span>
                                         </td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ $user->phone }}</td>
                                         <td>
                                             <ul class="list-inline mb-0">
                                                 <li class="list-inline-item">
@@ -86,38 +82,6 @@
         </div>
     </div>
 
-    {{-- <div class="row g-0 align-items-center pb-4">
-        <div class="col-sm-6">
-            <p class="mb-sm-0">Showing 1 to 10 of 57 entries</p>
-        </div>
-        <div class="col-sm-6">
-            <div class="float-sm-end">
-                <ul class="pagination mb-sm-0">
-                    <li class="page-item disabled">
-                        <a href="#" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
-                    </li>
-                    <li class="page-item active">
-                        <a href="#" class="page-link">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a href="#" class="page-link">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a href="#" class="page-link">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a href="#" class="page-link">4</a>
-                    </li>
-                    <li class="page-item">
-                        <a href="#" class="page-link">5</a>
-                    </li>
-                    <li class="page-item">
-                        <a href="#" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div> --}}
 
     <!--  successfully modal  -->
     <div id="success-btn" class="modal fade" tabindex="-1" aria-labelledby="success-btnLabel" aria-hidden="true"
@@ -154,40 +118,7 @@
                                         name="name" required>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label">Position</label>
-                                    <select class="form-select" name="role" required>
-                                        <option selected>Select Position</option>
-                                        <option value="user">User</option>
-                                        <option value="admin">Admin</option>
-                                        <option value="manager">Manager</option>
-                                        <option value="agent">Agent</option>
-                                        <option value="blogger">Blogger</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label" for="AddNew-Email">Email</label>
-                                    <input type="email" class="form-control" placeholder="Enter Email"
-                                        id="AddNew-Email" name="email" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label" for="AddNew-Phone">Phone</label>
-                                    <input type="text" class="form-control" placeholder="Enter Phone"
-                                        id="AddNew-Phone" name="phone">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label" for="AddNew-Whatsapp">Whatsapp</label>
-                                    <input type="text" class="form-control" placeholder="Enter Whatsapp"
-                                        id="AddNew-Whatsapp" name="whatsapp">
-                                </div>
-                            </div>
+
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label" for="AddNew-Password">Password</label>
@@ -195,13 +126,7 @@
                                         id="AddNew-Password" name="password" required>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label" for="AddNew-Password-Confirmation">Confirm Password</label>
-                                    <input type="password" class="form-control" placeholder="Confirm Password"
-                                        id="AddNew-Password-Confirmation" name="password_confirmation" required>
-                                </div>
-                            </div>
+
                         </div>
                         <div class="row mt-2">
                             <div class="col-12 text-end">

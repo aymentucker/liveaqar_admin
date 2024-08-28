@@ -11,6 +11,8 @@ class Comment extends Model
     protected $fillable = [
         'title',
         'content',
+        'title_en',
+        'content_en',
         'rating',
         'email',
         'visibility',

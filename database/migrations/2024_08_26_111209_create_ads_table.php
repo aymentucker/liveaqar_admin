@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('ads', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('title_en');
             $table->text('description')->nullable();
+            $table->text('description_en')->nullable();
             $table->string('image')->nullable();
             $table->string('url')->nullable();
             $table->date('start_date')->nullable();

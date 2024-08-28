@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('title_en');
             $table->text('content');
+            $table->text('content_en');
             $table->integer('rating')->nullable();
             $table->string('email')->nullable();
             $table->boolean('visibility')->default(true);

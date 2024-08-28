@@ -10,7 +10,10 @@ class Agency extends Model
     use HasFactory;
     protected $fillable = [
         'name',
+        'name_en',
         'description',
+
+        'description_en',
         'logo',
         'email',
         'whatsapp',

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('property_status');
             $table->enum('inquirer_type', ['owner', 'agency']);
             $table->string('name');
+            $table->string('name_en');
             $table->string('email');
             $table->string('phone')->nullable();
             $table->timestamps();

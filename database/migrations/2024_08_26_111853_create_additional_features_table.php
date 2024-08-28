@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('property_id')->constrained('properties')->onDelete('cascade');
             $table->string('feature_name');
+            $table->string('feature_name_en');
             $table->string('feature_value')->nullable();
             $table->timestamps();
         });

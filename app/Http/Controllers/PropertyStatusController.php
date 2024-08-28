@@ -12,7 +12,9 @@ class PropertyStatusController extends Controller
      */
     public function index()
     {
-        //
+        $propertystatus = PropertyStatus::all();
+        return view("propertystatus", compact("propertystatus"));
+
     }
 
     /**

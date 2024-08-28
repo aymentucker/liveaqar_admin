@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class State extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'image', 'city_id'];
+    protected $fillable = ['name', 'name_en', 'image', 'city_id'];
 
     public function city()
     {

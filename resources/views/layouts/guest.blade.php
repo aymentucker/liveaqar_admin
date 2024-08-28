@@ -32,7 +32,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="text-center p-4">
-                            <p>© <script>document.write(new Date().getFullYear())</script> webadmin. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesdesign</p>
+                            <p>© <script>document.write(new Date().getFullYear())</script> LiveAqar.  Developed <i class="mdi mdi-heart text-danger"></i> <a href="https://brander.qa/"
+                                target="_blank" class="text-reset">Brander</a></p>
                         </div>
                     </div>
                 </div>
