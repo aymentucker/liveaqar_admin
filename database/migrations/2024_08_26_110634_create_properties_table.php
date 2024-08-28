@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreignId('agency_id')->nullable()->constrained('agencies')->onDelete('set null');
             $table->string('title_en');
             $table->string('title_ar');
             $table->text('description_en');
@@ -42,9 +44,9 @@ return new class extends Migration
             $table->json('features')->nullable();
             $table->json('additional_features')->nullable();
             $table->timestamps();
-
         });
     }
+
 
     /**
      * Reverse the migrations.
