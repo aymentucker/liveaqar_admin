@@ -16,6 +16,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             CityStateSeeder::class,
+            PropertyTypeSeeder::class,
+            PropertyStatusSeeder::class,
+            PropertyFeatureSeeder::class,
         ]);
         // User::factory(10)->create();
 

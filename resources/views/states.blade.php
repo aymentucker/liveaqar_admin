@@ -34,8 +34,9 @@
                                         </div>
                                     </th>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Arabic Name</th>
                                     <th scope="col">English Name</th>
+                                    <th scope="col">Arabic Name</th>
+
                                     <th scope="col">City Name</th>
                                     <th scope="col" style="width: 200px;">Action</th>
                                 </tr>
@@ -50,8 +51,9 @@
                                             </div>
                                         </th>
                                         <td>{{ $state->id }}</td>
-                                        <td>{{ $state->name }}</td>
+
                                         <td>{{ $state->name_en }}</td>
+                                        <td>{{ $state->name }}</td>
                                         <td>{{ $state->city->name_en }}</td>
                                         <td>
                                             <ul class="list-inline mb-0">

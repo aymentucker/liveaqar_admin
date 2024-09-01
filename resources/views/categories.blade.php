@@ -34,8 +34,9 @@
                                         </div>
                                     </th>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Arabic Name</th>
                                     <th scope="col">English Name</th>
+                                    <th scope="col">Arabic Name</th>
+
                                     <th scope="col" style="width: 200px;">Action</th>
                                 </tr>
                             </thead>
@@ -49,8 +50,9 @@
                                             </div>
                                         </th>
                                         <td>{{ $category->id }}</td>
-                                        <td>{{ $category->name }}</td>
+
                                         <td>{{ $category->name_en }}</td>
+                                        <td>{{ $category->name }}</td>
                                         <td>
                                             <ul class="list-inline mb-0">
                                                 <li class="list-inline-item">

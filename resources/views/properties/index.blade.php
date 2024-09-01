@@ -214,7 +214,7 @@
 
                                             <div class="col-md-6">
                                                 <div class="mb-3">
-                                                    <label class="form-label" for="type_id">Type</label>
+                                                    <label class="form-label" for="type_id">Property Type</label>
                                                     <select class="form-select" id="type_id" name="type_id">
                                                         <option selected>Select Type</option>
                                                         @foreach ($propertyType as $type)
@@ -226,7 +226,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="mb-3">
-                                                    <label class="form-label" for="status_id">Status</label>
+                                                    <label class="form-label" for="status_id">Property Status</label>
                                                     <select class="form-select" id="status_id" name="status_id">
                                                         <option selected>Select Status</option>
                                                         @foreach ($propertyStatus as $status)

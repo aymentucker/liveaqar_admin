@@ -34,8 +34,9 @@
                                         </div>
                                     </th>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Arabic Title</th>
                                     <th scope="col">English Title</th>
+                                    <th scope="col">Arabic Title</th>
+
                                     <th scope="col">Image</th>
                                     <th scope="col">URL</th>
                                     <th scope="col" style="width: 200px;">Action</th>
@@ -51,8 +52,9 @@
                                             </div>
                                         </th>
                                         <td>{{ $partner->id }}</td>
-                                        <td>{{ $partner->title }}</td>
                                         <td>{{ $partner->title_en }}</td>
+                                        <td>{{ $partner->title }}</td>
+
                                         <td><img src="{{ asset('storage/' . $partner->image) }}" alt="image" width="100"></td>
                                         <td>{{ $partner->url }}</td>
                                         <td>

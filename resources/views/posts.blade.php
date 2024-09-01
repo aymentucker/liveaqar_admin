@@ -146,8 +146,9 @@
                                         </div>
                                     </th>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Arabic Title</th>
                                     <th scope="col">English Title</th>
+                                    <th scope="col">Arabic Title</th>
+
                                     <th scope="col">Featured Image</th>
                                     <th scope="col">Category</th>
                                     <th scope="col" style="width: 200px;">Action</th>
@@ -163,8 +164,9 @@
                                             </div>
                                         </th>
                                         <td>{{ $post->id }}</td>
-                                        <td>{{ $post->title }}</td>
+
                                         <td>{{ $post->title_en }}</td>
+                                        <td>{{ $post->title }}</td>
                                         <td><img src="{{ asset('storage/' . $post->featured_image) }}" alt="image" width="100"></td>
                                         <td>{{ $post->category->name ?? 'No Category' }}</td>
                                         <td>
