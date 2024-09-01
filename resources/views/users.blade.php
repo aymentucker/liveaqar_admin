@@ -6,7 +6,7 @@
     <div class="row align-items-center">
         <div class="col-md-6">
             <div class="mb-3">
-                <h5 class="card-title">Contact List <span class="text-muted fw-normal ms-2">(834)</span></h5>
+                <h5 class="card-title">Users List <span class="text-muted fw-normal ms-2">({{ $users->count() }})</span></h5>
             </div>
         </div>
 

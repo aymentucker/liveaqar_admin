@@ -1,18 +1,18 @@
 @extends('layouts.app')
 
-@section('title', 'Property Statuses List')
+@section('title', 'Cities List')
 
 @section('content')
     <div class="row align-items-center">
         <div class="col-md-6">
             <div class="mb-3">
-                <h5 class="card-title">Property Status List <span class="text-muted fw-normal ms-2">({{ $propertystatuses->count() }})</span></h5>
+                <h5 class="card-title">Cities List <span class="text-muted fw-normal ms-2">({{ $cities->count() }})</span></h5>
             </div>
         </div>
 
         <div class="col-md-6">
             <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
-                <a href="#" data-bs-toggle="modal" data-bs-target=".property-status-modal" class="btn btn-primary" onclick="openModal()">
+                <a href="#" data-bs-toggle="modal" data-bs-target=".city-modal" class="btn btn-primary" onclick="openModal()">
                     <i class="bx bx-plus me-1"></i> Add New
                 </a>
             </div>
@@ -40,7 +40,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($propertystatuses as $propertystatus)
+                                @foreach ($cities as $city)
                                     <tr>
                                         <th scope="row" class="ps-4">
                                             <div class="form-check font-size-16">
@@ -48,19 +48,19 @@
                                                 <label class="form-check-label" for="contacusercheck8"></label>
                                             </div>
                                         </th>
-                                        <td>{{ $propertystatus->id }}</td>
-                                        <td>{{ $propertystatus->name }}</td>
-                                        <td>{{ $propertystatus->name_en }}</td>
+                                        <td>{{ $city->id }}</td>
+                                        <td>{{ $city->name }}</td>
+                                        <td>{{ $city->name_en }}</td>
                                         <td>
                                             <ul class="list-inline mb-0">
                                                 <li class="list-inline-item">
                                                     <a href="javascript:void(0);" data-bs-toggle="tooltip"
-                                                        data-bs-placement="top" title="Edit" class="px-2 text-primary" onclick="openModal({{ $propertystatus }})">
+                                                        data-bs-placement="top" title="Edit" class="px-2 text-primary" onclick="openModal({{ $city }})">
                                                         <i class="bx bx-pencil font-size-18"></i>
                                                     </a>
                                                 </li>
                                                 <li class="list-inline-item">
-                                                    <form action="{{ route('property-status.destroy', $propertystatus->id) }}" method="POST" style="display: inline;">
+                                                    <form action="{{ route('cities.destroy', $city->id) }}" method="POST" style="display: inline;">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="px-2 text-danger" style="background: none; border: none;">
@@ -80,10 +80,10 @@
         </div>
     </div>
 
-    <!-- Modal for Adding/Editing Property Status -->
-    <form id="property-status-form" action="{{ route('property-status.store') }}" method="POST">
+    <!-- Modal for Adding/Editing city -->
+    <form id="city-form" action="{{ route('cities.store') }}" method="POST">
         @csrf
-        <div class="modal fade property-status-modal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal fade city-modal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -94,14 +94,14 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label" for="property-status-name-ar">Arabic Name</label>
-                                    <input type="text" class="form-control" placeholder="Enter Arabic name" id="property-status-name-ar" name="name" required>
+                                    <label class="form-label" for="city-name-ar">Arabic Name</label>
+                                    <input type="text" class="form-control" placeholder="Enter Arabic name" id="city-name-ar" name="name" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label" for="property-status-name-en">English Name</label>
-                                    <input type="text" class="form-control" placeholder="Enter English name" id="property-status-name-en" name="name_en" required>
+                                    <label class="form-label" for="city-name-en">English Name</label>
+                                    <input type="text" class="form-control" placeholder="Enter English name" id="city-name-en" name="name_en" required>
                                 </div>
                             </div>
                         </div>
@@ -123,36 +123,37 @@
 @endsection
 
 <script>
-    function openModal(propertystatus = null) {
-        const modalTitle = document.getElementById('modal-title');
-        const form = document.getElementById('property-status-form');
-        const arabicNameInput = document.getElementById('property-status-name-ar');
-        const englishNameInput = document.getElementById('property-status-name-en');
+ function openModal(city = null) {
+    const modalTitle = document.getElementById('modal-title');
+    const form = document.getElementById('city-form');
+    const arabicNameInput = document.getElementById('city-name-ar');
+    const englishNameInput = document.getElementById('city-name-en');
 
-        // Reset the form
-        form.reset();
-        // Remove any previous hidden _method input
-        const methodInput = form.querySelector('input[name="_method"]');
-        if (methodInput) {
-            methodInput.remove();
-        }
-
-        if (propertystatus) {
-            modalTitle.textContent = 'Edit Property Status';
-            form.action = `/property-status/${propertystatus.id}`;
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = '_method';
-            input.value = 'PUT';
-            form.appendChild(input);
-            arabicNameInput.value = propertystatus.name;
-            englishNameInput.value = propertystatus.name_en;
-        } else {
-            modalTitle.textContent = 'Add New';
-            form.action = '{{ route("property-status.store") }}';
-        }
-
-        const modal = new bootstrap.Modal(document.querySelector('.property-status-modal'));
-        modal.show();
+    // Reset the form
+    form.reset();
+    // Remove any previous hidden _method input
+    const methodInput = form.querySelector('input[name="_method"]');
+    if (methodInput) {
+        methodInput.remove();
     }
+
+    if (city) {
+        modalTitle.textContent = 'Edit city';
+        form.action = `/cities/${city.id}`;
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = '_method';
+        input.value = 'PUT';
+        form.appendChild(input);
+        arabicNameInput.value = city.name;
+        englishNameInput.value = city.name_en;
+    } else {
+        modalTitle.textContent = 'Add New';
+        form.action = '{{ route("cities.store") }}';
+    }
+
+    const modal = new bootstrap.Modal(document.querySelector('.city-modal'));
+    modal.show();
+}
+
 </script>

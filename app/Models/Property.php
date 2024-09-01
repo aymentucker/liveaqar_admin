@@ -82,4 +82,16 @@ class Property extends Model
     {
         return $this->hasMany(AdditionalFeature::class);
     }
+
+
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function agency()
+    {
+        return $this->belongsTo(Agency::class);
+    }
 }

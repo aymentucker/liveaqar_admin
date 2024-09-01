@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Agencie;
+use App\Models\AdditionalFeature;
 use Illuminate\Http\Request;
 
-class AgencieController extends Controller
+class AdditionalFeaturesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class AgencieController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Agencie $agencie)
+    public function show(AdditionalFeature $additionalFeature)
     {
         //
     }
@@ -42,7 +42,7 @@ class AgencieController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Agencie $agencie)
+    public function edit(AdditionalFeature $additionalFeature)
     {
         //
     }
@@ -50,7 +50,7 @@ class AgencieController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Agencie $agencie)
+    public function update(Request $request, AdditionalFeature $additionalFeature)
     {
         //
     }
@@ -58,7 +58,7 @@ class AgencieController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Agencie $agencie)
+    public function destroy(AdditionalFeature $additionalFeature)
     {
         //
     }

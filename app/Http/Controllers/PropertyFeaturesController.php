@@ -1,19 +1,18 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Models\PropertyStatus;
+use App\Models\PropertyFeature;
 use Illuminate\Http\Request;
 
-class PropertyStatusController extends Controller
+class PropertyFeaturesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $propertystatuses = PropertyStatus::all();
-        return view("propertystatus", compact("propertystatuses"));
+        $PropertyFeatures = PropertyFeature::all();
+        return view("property-features", compact("PropertyFeatures"));
 
     }
 
@@ -37,18 +36,18 @@ class PropertyStatusController extends Controller
             'name_en' => 'required|string|max:255',
         ]);
 
-        // Create new property status instance
+        // Create new property type instance
 
-        PropertyStatus::create($validatedData);
+        PropertyFeature::create($validatedData);
         // Return a response or redirect
 
-        return redirect()->route('property-status.index')->with('success', 'Property Status added successfully!');
+        return redirect()->route('property-features.index')->with('success', 'Property Feature added successfully!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(PropertyStatus $propertyStatus)
+    public function show(PropertyFeature $PropertyFeature)
     {
         //
     }
@@ -56,7 +55,7 @@ class PropertyStatusController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(PropertyStatus $propertyStatus)
+    public function edit(PropertyFeature $PropertyFeature)
     {
         //
     }
@@ -64,26 +63,26 @@ class PropertyStatusController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, PropertyStatus $propertyStatus)
+    public function update(Request $request, PropertyFeature $PropertyFeature)
     {
             // Validate the incoming request data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'name_en' => 'required|string|max:255',
         ]);
- // update the property status instance
-        $propertyStatus->update($validatedData);
+ // update the property type instance
+        $PropertyFeature->update($validatedData);
                 // Return a response or redirect
 
-        return redirect()->route('property-status.index')->with('success', 'Property Status updated successfully!');
+        return redirect()->route('property-features.index')->with('success', 'Property Feature updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PropertyStatus $propertyStatus)
+    public function destroy(PropertyFeature $PropertyFeature)
     {
-        $propertyStatus->delete();
-        return redirect()->route('property-status.index')->with('success', 'Property Status deleted successfully!');
+        $PropertyFeature->delete();
+        return redirect()->route('property-features.index')->with('success', 'Property Feature deleted successfully!');
     }
 }

@@ -23,7 +23,7 @@
 
     </head>
 
-    
+
     <body>
 
     <!-- <body data-layout="horizontal"> -->
@@ -31,7 +31,7 @@
         <!-- Begin page -->
         <div id="layout-wrapper">
 
-            
+
             <header id="page-topbar" class="isvertical-topbar">
                 <div class="navbar-header">
                     <div class="d-flex">
@@ -69,13 +69,13 @@
                     </div>
 
                     <div class="d-flex">
-          
+
                         <div class="dropdown d-inline-block language-switch ms-2">
                             <button type="button" class="btn header-item" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="header-lang-img" src="assets/images/flags/us.jpg" alt="Header Language" height="18">
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
-                    
+
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="eng">
                                     <img src="assets/images/flags/us.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">English</span>
@@ -151,7 +151,7 @@
                                                     <p class="mb-0">It will seem like simplified English.</p>
                                                 </div>
                                             </div>
-                                
+
                                         </div>
                                     </a>
                                     <a href="#!" class="text-reset notification-item">
@@ -209,7 +209,7 @@
                                 </div>
                             </div>
                         </div>
-            
+
                         <div class="dropdown d-inline-block">
                             <button type="button" class="btn header-item user text-start d-flex align-items-center" id="page-header-user-dropdown-v"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -341,7 +341,7 @@
                                 </ul>
                             </li>
 
-               
+
 
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow">
@@ -367,7 +367,7 @@
                             </li>
 
                             <li class="menu-title" data-key="t-layouts">Layouts</li>
-                
+
                             <li>
                                 <a href="layouts-horizontal.html">
                                     <i class="bx bx-layout icon nav-icon"></i>
@@ -574,7 +574,7 @@
                                 <img class="header-lang-img" src="assets/images/flags/us.jpg" alt="Header Language" height="18">
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
-                    
+
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="eng">
                                     <img src="assets/images/flags/us.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">English</span>
@@ -735,7 +735,7 @@
                 <div class="topnav">
                     <div class="container-fluid">
                         <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
-    
+
                             <div class="collapse navbar-collapse" id="topnav-menu-content">
                                 <ul class="navbar-nav">
                                     <li class="nav-item dropdown">
@@ -749,7 +749,7 @@
                                             <a href="dashboard-sales.html"  class="dropdown-item" data-key="t-sales">Sales</a>
                                         </div>
                                     </li>
-    
+
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-uielement" role="button"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -803,7 +803,7 @@
                                             </div>
                                         </div>
                                     </li>
-    
+
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-pages" role="button">
                                             <i class="bx bx-store icon nav-icon"></i>
@@ -872,7 +872,7 @@
                                             </div>
                                         </div>
                                     </li>
-    
+
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-components" role="button">
                                             <i class="bx bx-layer icon nav-icon"></i>
@@ -943,7 +943,7 @@
                                             </div>
                                         </div>
                                     </li>
-    
+
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-more" role="button">
                                             <i class="bx bx-file icon nav-icon"></i>
@@ -987,7 +987,7 @@
                                             <a href="layouts-horizontal.html" class="dropdown-item" data-key="t-horizontal">Horizontal</a>
                                         </div>
                                     </li>
-    
+
                                 </ul>
                             </div>
                         </nav>
@@ -1029,7 +1029,7 @@
                                         </div>
 
                                         <div>
-                                            <div id="overview" data-colors='["#e6ecf9", "#e6ecf9", "#e6ecf9","#e6ecf9", "#e6ecf9", "#e6ecf9","#e6ecf9","#e6ecf9","#e6ecf9","#1f58c7","#1f58c7", "#1f58c7"]' class="apex-chart"></div>
+                                            <div id="overview" data-colors='["#e6ecf9", "#e6ecf9", "#e6ecf9","#e6ecf9", "#e6ecf9", "#e6ecf9","#e6ecf9","#e6ecf9","#e6ecf9","#bf2126","#bf2126", "#bf2126"]' class="apex-chart"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -1076,7 +1076,7 @@
                                                                 <p class="text-muted mb-0 text-truncate">Total Sales World Wide</p>
                                                             </div>
                                                             <div class="flex-shrink-0">
-                                                                <div id="mini-1" data-colors='["#1f58c7"]' class="apex-charts"></div>
+                                                                <div id="mini-1" data-colors='["#bf2126"]' class="apex-charts"></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1124,7 +1124,7 @@
                                                                 <p class="text-muted mb-0 text-truncate">Total Orders World Wide</p>
                                                             </div>
                                                             <div class="flex-shrink-0">
-                                                                <div id="mini-2" data-colors='["#1f58c7"]' class="apex-charts"></div>
+                                                                <div id="mini-2" data-colors='["#bf2126"]' class="apex-charts"></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1173,7 +1173,7 @@
                                                                 <p class="text-muted mb-0 text-truncate">Total Visitor World Wide</p>
                                                             </div>
                                                             <div class="flex-shrink-0">
-                                                                <div id="mini-3" data-colors='["#1f58c7"]' class="apex-charts"></div>
+                                                                <div id="mini-3" data-colors='["#bf2126"]' class="apex-charts"></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1181,7 +1181,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-xl-6">
                                         <div class="card">
                                             <div class="card-body">
@@ -1222,7 +1222,7 @@
                                                                 <p class="text-muted mb-0 text-truncate">Total Expense World Wide</p>
                                                             </div>
                                                             <div class="flex-shrink-0">
-                                                                <div id="mini-4" data-colors='["#1f58c7"]' class="apex-charts"></div>
+                                                                <div id="mini-4" data-colors='["#bf2126"]' class="apex-charts"></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1441,7 +1441,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-            
+
                                                     <div class="border-bottom loyal-customers-box">
                                                         <div class="d-flex align-items-center">
                                                             <img src="assets/images/users/avatar-5.jpg" class="rounded-circle avatar img-thumbnail" alt="">
@@ -1455,7 +1455,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-            
+
                                                     <div class="border-bottom loyal-customers-box">
                                                         <div class="d-flex align-items-center">
                                                             <img src="assets/images/users/avatar-6.jpg" class="rounded-circle avatar img-thumbnail" alt="">
@@ -1469,7 +1469,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-            
+
                                                     <div class="border-bottom loyal-customers-box">
                                                         <div class="d-flex align-items-center">
                                                             <img src="assets/images/users/avatar-7.jpg" class="rounded-circle avatar img-thumbnail" alt="">
@@ -1483,7 +1483,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-            
+
                                                     <div class="border-bottom loyal-customers-box">
                                                         <div class="d-flex align-items-center">
                                                             <img src="assets/images/users/avatar-8.jpg" class="rounded-circle avatar img-thumbnail" alt="">
@@ -1497,7 +1497,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-            
+
                                                     <div class="py-3 loyal-customers-box">
                                                         <div class="d-flex align-items-center">
                                                             <img src="assets/images/users/avatar-5.jpg" class="rounded-circle avatar img-thumbnail" alt="">
@@ -1512,13 +1512,13 @@
                                                         </div>
                                                     </div>
                                                 </div>
-            
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="col-xxl-4">
                                 <div class="card">
                                     <div class="card-body">
@@ -1543,7 +1543,7 @@
                                             </div>
                                         </div>
 
-                                        <div id="saleing-categories" data-colors='["#1f58c7", "#4976cf","#6a92e1", "#e6ecf9"]' class="apex-charts" dir="ltr"></div> 
+                                        <div id="saleing-categories" data-colors='["#bf2126", "#4976cf","#6a92e1", "#e6ecf9"]' class="apex-charts" dir="ltr"></div>
 
                                         <div class="row mt-3 pt-1">
                                             <div class="col-md-6">
@@ -1600,7 +1600,7 @@
                         </div>
                         <!-- end row -->
 
-                        <div class="row"> 
+                        <div class="row">
                                 <div class="col-xl-7">
                                     <div class="card">
                                         <div class="card-body">
@@ -1655,7 +1655,7 @@
                                                                         <td>46k</td>
                                                                         <td>$6,524.30</td>
                                                                     </tr>
-                    
+
                                                                     <tr>
                                                                         <td>
                                                                             <div class="d-flex align-items-center">
@@ -1668,7 +1668,7 @@
                                                                         <td>86k</td>
                                                                         <td>$6,985.94</td>
                                                                     </tr>
-                    
+
                                                                     <tr>
                                                                         <td>
                                                                             <div class="d-flex align-items-center">
@@ -1681,7 +1681,7 @@
                                                                         <td>86k</td>
                                                                         <td>$5,685.47</td>
                                                                     </tr>
-                    
+
                                                                     <tr>
                                                                         <td>
                                                                             <div class="d-flex align-items-center">
@@ -1694,7 +1694,7 @@
                                                                         <td>56k</td>
                                                                         <td>$5,645.45</td>
                                                                     </tr>
-                                                                
+
                                                                 </tbody>
                                                             </table>
                                                     </div>
@@ -1763,13 +1763,13 @@
                                                                 <td>
                                                                     <div class="badge bg-success-subtle text-success  font-size-12">Paid</div>
                                                                 </td>
-                                                                
+
                                                                 <td>
                                                                     <div class="dropdown">
                                                                         <a class="text-muted dropdown-toggle font-size-18" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
                                                                             <i class="mdi mdi-dots-horizontal"></i>
                                                                         </a>
-                    
+
                                                                         <div class="dropdown-menu dropdown-menu-end">
                                                                             <a class="dropdown-item" href="#">Edit</a>
                                                                             <a class="dropdown-item" href="#">Print</a>
@@ -1777,8 +1777,8 @@
                                                                         </div>
                                                                     </div>
                                                                 </td>
-                                                            </tr>   
-                                                            
+                                                            </tr>
+
                                                             <tr>
                                                                 <td>
                                                                     <div class="form-check font-size-16">
@@ -1801,13 +1801,13 @@
                                                                 <td>
                                                                     <div class="badge bg-success-subtle text-success  font-size-12">Paid</div>
                                                                 </td>
-                                                                
+
                                                                 <td>
                                                                     <div class="dropdown">
                                                                         <a class="text-muted dropdown-toggle font-size-18" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
                                                                             <i class="mdi mdi-dots-horizontal"></i>
                                                                         </a>
-                    
+
                                                                         <div class="dropdown-menu dropdown-menu-end">
                                                                             <a class="dropdown-item" href="#">Edit</a>
                                                                             <a class="dropdown-item" href="#">Print</a>
@@ -1815,8 +1815,8 @@
                                                                         </div>
                                                                     </div>
                                                                 </td>
-                                                            </tr>  
-    
+                                                            </tr>
+
                                                             <tr>
                                                                 <td>
                                                                     <div class="form-check font-size-16">
@@ -1839,13 +1839,13 @@
                                                                 <td>
                                                                     <div class="badge bg-danger-subtle text-danger  font-size-12">Unpaid</div>
                                                                 </td>
-                                                                
+
                                                                 <td>
                                                                     <div class="dropdown">
                                                                         <a class="text-muted dropdown-toggle font-size-18" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
                                                                             <i class="mdi mdi-dots-horizontal"></i>
                                                                         </a>
-                    
+
                                                                         <div class="dropdown-menu dropdown-menu-end">
                                                                             <a class="dropdown-item" href="#">Edit</a>
                                                                             <a class="dropdown-item" href="#">Print</a>
@@ -1853,8 +1853,8 @@
                                                                         </div>
                                                                     </div>
                                                                 </td>
-                                                            </tr> 
-    
+                                                            </tr>
+
                                                             <tr>
                                                                 <td>
                                                                     <div class="form-check font-size-16">
@@ -1877,13 +1877,13 @@
                                                                 <td>
                                                                     <div class="badge bg-success-subtle text-success  font-size-12">Paid</div>
                                                                 </td>
-                                                                
+
                                                                 <td>
                                                                     <div class="dropdown">
                                                                         <a class="text-muted dropdown-toggle font-size-18" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
                                                                             <i class="mdi mdi-dots-horizontal"></i>
                                                                         </a>
-                    
+
                                                                         <div class="dropdown-menu dropdown-menu-end">
                                                                             <a class="dropdown-item" href="#">Edit</a>
                                                                             <a class="dropdown-item" href="#">Print</a>
@@ -1891,8 +1891,8 @@
                                                                         </div>
                                                                     </div>
                                                                 </td>
-                                                            </tr> 
-    
+                                                            </tr>
+
                                                             <tr>
                                                                 <td>
                                                                     <div class="form-check font-size-16">
@@ -1915,13 +1915,13 @@
                                                                 <td>
                                                                     <div class="badge bg-danger-subtle text-danger  font-size-12">Unpaid</div>
                                                                 </td>
-                                                                
+
                                                                 <td>
                                                                     <div class="dropdown">
                                                                         <a class="text-muted dropdown-toggle font-size-18" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
                                                                             <i class="mdi mdi-dots-horizontal"></i>
                                                                         </a>
-                    
+
                                                                         <div class="dropdown-menu dropdown-menu-end">
                                                                             <a class="dropdown-item" href="#">Edit</a>
                                                                             <a class="dropdown-item" href="#">Print</a>
@@ -1929,8 +1929,8 @@
                                                                         </div>
                                                                     </div>
                                                                 </td>
-                                                            </tr> 
-    
+                                                            </tr>
+
                                                             <tr>
                                                                 <td>
                                                                     <div class="form-check font-size-16">
@@ -1953,13 +1953,13 @@
                                                                 <td>
                                                                     <div class="badge bg-success-subtle text-success  font-size-12">Paid</div>
                                                                 </td>
-                                                                
+
                                                                 <td>
                                                                     <div class="dropdown">
                                                                         <a class="text-muted dropdown-toggle font-size-18" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
                                                                             <i class="mdi mdi-dots-horizontal"></i>
                                                                         </a>
-                    
+
                                                                         <div class="dropdown-menu dropdown-menu-end">
                                                                             <a class="dropdown-item" href="#">Edit</a>
                                                                             <a class="dropdown-item" href="#">Print</a>
@@ -1967,8 +1967,8 @@
                                                                         </div>
                                                                     </div>
                                                                 </td>
-                                                            </tr> 
-                                                            
+                                                            </tr>
+
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -2086,7 +2086,7 @@
 
                     <h6 class="mt-4 mb-3">Topbar Type</h6>
 
-            
+
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="topbar-color"
                             id="topbar-color-light" value="light" onchange="document.body.setAttribute('data-topbar', 'light')">
@@ -2103,7 +2103,7 @@
                             id="topbar-type-hidden" value="hidden" onchange="document.body.setAttribute('data-topbar', 'hidden')">
                         <label class="form-check-label" for="topbar-type-hidden">Hidden</label>
                     </div>
-            
+
 
                     <div id="sidebar-setting">
                     <h6 class="mt-4 mb-3 sidebar-setting">Sidebar Size</h6>
@@ -2188,7 +2188,7 @@
         <!-- Vector map-->
         <script src="assets/libs/jsvectormap/js/jsvectormap.min.js"></script>
         <script src="assets/libs/jsvectormap/maps/world-merc.js"></script>
-        
+
         <script src="assets/js/pages/dashboard.init.js"></script>
 
         <script src="assets/js/app.js"></script>

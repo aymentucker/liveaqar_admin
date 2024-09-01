@@ -9,6 +9,8 @@ class Review extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'property_id',
+        'agency_id',
         'title',
         'content',
         'title_en',
@@ -22,4 +24,14 @@ class Review extends Model
     protected $casts = [
         'display_location' => 'array',
     ];
+
+    public function property()
+    {
+        return $this->belongsTo(Property::class);
+    }
+
+    public function agency()
+    {
+        return $this->belongsTo(Agency::class);
+    }
 }

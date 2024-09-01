@@ -1,6 +1,6 @@
 @extends('layouts.guest')
 
-@section('title', 'Login | webadmin')
+@section('title', 'Login | LiveAqar')
 
    <!-- Session Status -->
    <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -30,9 +30,9 @@
                         @csrf
 
                         <div class="mb-3">
-                            <label class="form-label" for="username">Username</label>
+                            <label class="form-label" for="email">Email</label>
                             <div class="position-relative input-custom-icon">
-                                <input type="text" class="form-control" id="username" name="email" placeholder="Enter username" value="{{ old('email') }}" required autofocus>
+                                <input type="text" class="form-control" id="email" name="email" placeholder="Enter email" value="{{ old('email') }}" required autofocus>
                                 <span class="bx bx-user"></span>
                             </div>
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />

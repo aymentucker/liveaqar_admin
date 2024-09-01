@@ -35,7 +35,7 @@
             <li class="menu-title" data-key="t-menu">Dashboard</li>
 
             <li>
-                <a href="javascript: void(0);">
+                <a href="#">
                     <i class="bx bx-home-alt icon nav-icon"></i>
                     <span class="menu-item" data-key="t-dashboard">Home</span>
                 </a>
@@ -53,14 +53,14 @@
                 <ul class="sub-menu" aria-expanded="false">
                     <li><a href="{{ route('properties.index') }}" data-key="t-properties">Properties</a>
                     </li>
-                    <li><a href="#" data-key="t-proprety-types">Property Types</a></li>
-                    <li><a href="#" data-key="t-property-features">Property Features</a></li>
-                    <li><a href="#" data-key="t-states">Property Status</a></li>
-                    <li><a href="#" data-key="t-agencies">Agencies</a></li>
-                    <li><a href="#" data-key="t-agents">Agents</a></li>
-                    <li><a href="#" data-key="t-cities">Cities</a></li>
-                    <li><a href="#" data-key="t-states">States</a></li>
-                    <li><a href="#" data-key="t-reviews">Reviews</a></li>
+                    <li><a href="{{ route('property-types.index') }}" data-key="t-proprety-types">Property Types</a></li>
+                    <li><a href="{{ route('property-features.index') }}" data-key="t-property-features">Property Features</a></li>
+                    <li><a href="{{ route('property-status.index') }}" data-key="t-states">Property Status</a></li>
+                    <li><a href="{{ route('agencies.index') }}" data-key="t-agencies">Agencies</a></li>
+                    <li><a href="{{ route('agents.index') }}" data-key="t-agents">Agents</a></li>
+                    <li><a href="{{ route('cities.index') }}" data-key="t-cities">Cities</a></li>
+                    <li><a href="{{ route('states.index') }}" data-key="t-states">States</a></li>
+                    <li><a href="{{ route('reviews.index') }}" data-key="t-reviews">Reviews</a></li>
 
                 </ul>
             </li>
@@ -88,7 +88,7 @@
             <li class="menu-title" data-key="t-monetization">Monetization</li>
 
             <li>
-                <a href="#">
+                <a href="{{ route('ads.index') }}">
                     <i class="bx bx-layout icon nav-icon"></i>
                     <span class="menu-item" data-key="t-ads">Ads</span>
                 </a>
@@ -102,7 +102,7 @@
             </li>
 
             <li>
-                <a href="#">
+                <a href="{{ route('partners.index') }}">
                     <i class="bx bx-receipt icon nav-icon"></i>
                     <span class="menu-item" data-key="t-parteners">Parteners</span>
                 </a>
@@ -112,21 +112,21 @@
             <li class="menu-title" data-key="t-blog">Blog</li>
 
             <li>
-                <a href="#">
+                <a href="{{{ route('categories.index') }}}">
                     <i class="bx bx-menu-alt-left icon nav-icon"></i>
                     <span class="menu-item" data-key="t-ads">Categories</span>
                 </a>
             </li>
 
             <li>
-                <a href="#">
+                <a href="{{{ route('posts.index') }}}">
                     <i class="bx bx-file icon nav-icon"></i>
                     <span class="menu-item" data-key="t-packages">Posts</span>
                 </a>
             </li>
 
             <li>
-                <a href="#">
+                <a href="{{{ route('comments.index') }}}">
                     <i class="bx bx-message-dots icon nav-icon"></i>
                     <span class="menu-item" data-key="t-packages">Comments</span>
                 </a>
@@ -294,12 +294,12 @@
                 <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-3.jpg"
                     alt="Header Avatar">
                 <span
-                    class="d-none d-xl-inline-block ms-2 fw-medium font-size-15">{{ Auth::user()->name }}</span>
+                    class="d-none d-xl-inline-block ms-2 fw-medium font-size-15">kkk</span>
             </button>
             <div class="dropdown-menu dropdown-menu-end pt-0">
                 <div class="p-3 border-bottom">
-                    <h6 class="mb-0">{{ Auth::user()->name }}</h6>
-                    <p class="mb-0 font-size-11 text-muted">{{ Auth::user()->email }}</p>
+                    <h6 class="mb-0">ooo</h6>
+                    <p class="mb-0 font-size-11 text-muted">ooooooo</p>
                 </div>
                 <a class="dropdown-item" href="contacts-profile.html"><i
                         class="mdi mdi-account-circle text-muted font-size-16 align-middle me-2"></i> <span
@@ -314,7 +314,7 @@
                         class="mdi mdi-cog-outline text-muted font-size-16 align-middle me-2"></i> <span
                         class="align-middle me-3">Settings</span></a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="auth-logout.html"><i
+                <a class="dropdown-item" href="{{Auth::logout()}}"><i
                         class="mdi mdi-logout text-muted font-size-16 align-middle me-2"></i> <span
                         class="align-middle">Logout</span></a>
             </div>

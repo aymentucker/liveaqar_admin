@@ -17,8 +17,9 @@ return new class extends Migration
             $table->string('name_en');
 
             $table->string('image')->nullable();
+            $table->foreignId('city_id')->constrained()->onDelete('cascade');
 
-            $table->foreignId('city_id')->constrained('cities')->onDelete('cascade');
+            // $table->foreignId('city_id')->constrained('cities')->onDelete('cascade');
             $table->timestamps();
         });
     }

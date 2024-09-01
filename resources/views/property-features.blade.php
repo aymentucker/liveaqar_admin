@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Property Statuses List')
+@section('title', 'Property Features List')
 
 @section('content')
     <div class="row align-items-center">
         <div class="col-md-6">
             <div class="mb-3">
-                <h5 class="card-title">Property Status List <span class="text-muted fw-normal ms-2">({{ $propertystatuses->count() }})</span></h5>
+                <h5 class="card-title">Property Features List <span class="text-muted fw-normal ms-2">({{ $PropertyFeatures->count() }})</span></h5>
             </div>
         </div>
 
@@ -40,27 +40,27 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($propertystatuses as $propertystatus)
+                                @foreach ($PropertyFeatures as $PropertyFeature)
                                     <tr>
                                         <th scope="row" class="ps-4">
                                             <div class="form-check font-size-16">
-                                                <input type="checkbox" class="form-check-input" id="contacusercheck8">
-                                                <label class="form-check-label" for="contacusercheck8"></label>
+                                                <input type="checkbox" class="form-check-input" id="contacusercheck{{ $PropertyFeature->id }}">
+                                                <label class="form-check-label" for="contacusercheck{{ $PropertyFeature->id }}"></label>
                                             </div>
                                         </th>
-                                        <td>{{ $propertystatus->id }}</td>
-                                        <td>{{ $propertystatus->name }}</td>
-                                        <td>{{ $propertystatus->name_en }}</td>
+                                        <td>{{ $PropertyFeature->id }}</td>
+                                        <td>{{ $PropertyFeature->name }}</td>
+                                        <td>{{ $PropertyFeature->name_en }}</td>
                                         <td>
                                             <ul class="list-inline mb-0">
                                                 <li class="list-inline-item">
                                                     <a href="javascript:void(0);" data-bs-toggle="tooltip"
-                                                        data-bs-placement="top" title="Edit" class="px-2 text-primary" onclick="openModal({{ $propertystatus }})">
+                                                        data-bs-placement="top" title="Edit" class="px-2 text-primary" onclick="openModal({{ $PropertyFeature }})">
                                                         <i class="bx bx-pencil font-size-18"></i>
                                                     </a>
                                                 </li>
                                                 <li class="list-inline-item">
-                                                    <form action="{{ route('property-status.destroy', $propertystatus->id) }}" method="POST" style="display: inline;">
+                                                    <form action="{{ route('property-features.destroy', $PropertyFeature->id) }}" method="POST" style="display: inline;">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="px-2 text-danger" style="background: none; border: none;">
@@ -80,8 +80,8 @@
         </div>
     </div>
 
-    <!-- Modal for Adding/Editing Property Status -->
-    <form id="property-status-form" action="{{ route('property-status.store') }}" method="POST">
+    <!-- Modal for Adding/Editing Property Feature -->
+    <form id="property-status-form" action="{{ route('property-features.store') }}" method="POST">
         @csrf
         <div class="modal fade property-status-modal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl modal-dialog-centered">
@@ -123,7 +123,7 @@
 @endsection
 
 <script>
-    function openModal(propertystatus = null) {
+    function openModal(PropertyFeature = null) {
         const modalTitle = document.getElementById('modal-title');
         const form = document.getElementById('property-status-form');
         const arabicNameInput = document.getElementById('property-status-name-ar');
@@ -137,19 +137,19 @@
             methodInput.remove();
         }
 
-        if (propertystatus) {
-            modalTitle.textContent = 'Edit Property Status';
-            form.action = `/property-status/${propertystatus.id}`;
+        if (PropertyFeature) {
+            modalTitle.textContent = 'Edit Property Feature';
+            form.action = `/property-features/${PropertyFeature.id}`;
             const input = document.createElement('input');
             input.type = 'hidden';
             input.name = '_method';
             input.value = 'PUT';
             form.appendChild(input);
-            arabicNameInput.value = propertystatus.name;
-            englishNameInput.value = propertystatus.name_en;
+            arabicNameInput.value = PropertyFeature.name;
+            englishNameInput.value = PropertyFeature.name_en;
         } else {
             modalTitle.textContent = 'Add New';
-            form.action = '{{ route("property-status.store") }}';
+            form.action = '{{ route("property-features.store") }}';
         }
 
         const modal = new bootstrap.Modal(document.querySelector('.property-status-modal'));

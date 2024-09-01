@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PropertyStatus;
+use App\Models\PropertyType;
 use Illuminate\Http\Request;
 
-class PropertyStatusController extends Controller
+
+class PropertyTypesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $propertystatuses = PropertyStatus::all();
-        return view("propertystatus", compact("propertystatuses"));
+        $propertyTypes = PropertyType::all();
+        return view("property-types", compact("propertyTypes"));
 
     }
 
@@ -37,18 +38,18 @@ class PropertyStatusController extends Controller
             'name_en' => 'required|string|max:255',
         ]);
 
-        // Create new property status instance
+        // Create new property type instance
 
-        PropertyStatus::create($validatedData);
+        PropertyType::create($validatedData);
         // Return a response or redirect
 
-        return redirect()->route('property-status.index')->with('success', 'Property Status added successfully!');
+        return redirect()->route('property-types.index')->with('success', 'Property Type added successfully!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(PropertyStatus $propertyStatus)
+    public function show(PropertyType $propertyType)
     {
         //
     }
@@ -56,7 +57,7 @@ class PropertyStatusController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(PropertyStatus $propertyStatus)
+    public function edit(PropertyType $propertyType)
     {
         //
     }
@@ -64,26 +65,26 @@ class PropertyStatusController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, PropertyStatus $propertyStatus)
+    public function update(Request $request, PropertyType $propertyType)
     {
             // Validate the incoming request data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'name_en' => 'required|string|max:255',
         ]);
- // update the property status instance
-        $propertyStatus->update($validatedData);
+ // update the property type instance
+        $propertyType->update($validatedData);
                 // Return a response or redirect
 
-        return redirect()->route('property-status.index')->with('success', 'Property Status updated successfully!');
+        return redirect()->route('property-type.index')->with('success', 'Property type updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PropertyStatus $propertyStatus)
+    public function destroy(PropertyType $propertyType)
     {
-        $propertyStatus->delete();
-        return redirect()->route('property-status.index')->with('success', 'Property Status deleted successfully!');
+        $propertyType->delete();
+        return redirect()->route('property-type.index')->with('success', 'Property type deleted successfully!');
     }
 }

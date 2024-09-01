@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('features', function (Blueprint $table) {
+        Schema::create('property_additional_features', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('name_en');
+            $table->foreignId('property_id')->constrained('properties')->onDelete('cascade');
+            $table->string('feature_name');
+            $table->string('feature_name_en');
+            $table->string('feature_value')->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('features');
+        Schema::dropIfExists('additional_features');
     }
 };

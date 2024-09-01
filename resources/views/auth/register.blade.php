@@ -1,6 +1,6 @@
 @extends('layouts.guest')
 
-@section('title', 'Register | webadmin')
+@section('title', 'Register | LiveAqar')
 
 @section('content')
 <div class="row justify-content-center my-auto">

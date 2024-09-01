@@ -33,4 +33,14 @@ class Agency extends Model
     {
         return $this->hasMany(Agent::class);
     }
+
+    public function properties()
+    {
+        return $this->hasMany(Property::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }

@@ -9,6 +9,7 @@ class Comment extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'post_id',
         'title',
         'content',
         'title_en',
@@ -16,5 +17,10 @@ class Comment extends Model
         'rating',
         'email',
         'visibility',
+
     ];
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
 }
