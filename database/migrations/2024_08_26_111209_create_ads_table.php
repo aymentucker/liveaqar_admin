@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('url')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
+            $table->enum('type', ['banner', 'interstitial', 'sponsor'])->default('banner');
             $table->timestamps();
         });
     }

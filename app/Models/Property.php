@@ -10,6 +10,8 @@ class Property extends Model
     use HasFactory;
 
     protected $fillable = [
+        'agency_id',
+        'user_id',
         'title_en',
         'title_ar',
         'description_en',
@@ -20,6 +22,7 @@ class Property extends Model
         'state_id',
         'featured_image',
         'featured_video',
+        'url_link',
         'gallery',
         'price',
         'area_size',
@@ -48,15 +51,16 @@ class Property extends Model
         'additional_features' => 'array',
     ];
 
-    public function type()
-    {
-        return $this->belongsTo(PropertyType::class);
-    }
+    public function property_type()
+{
+    return $this->belongsTo(PropertyType::class, 'type_id');
+}
 
-    public function status()
-    {
-        return $this->belongsTo(PropertyStatus::class);
-    }
+public function property_status()
+{
+    return $this->belongsTo(PropertyStatus::class, 'status_id');
+}
+
 
     public function city()
     {
@@ -92,6 +96,6 @@ class Property extends Model
 
     public function agency()
     {
-        return $this->belongsTo(Agency::class);
+        return $this->belongsTo(Agency::class , 'agency_id');
     }
 }

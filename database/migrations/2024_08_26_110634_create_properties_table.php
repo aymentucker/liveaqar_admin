@@ -25,6 +25,7 @@ return new class extends Migration
             $table->foreignId('state_id')->constrained('states');
             $table->string('featured_image')->nullable();
             $table->string('featured_video')->nullable();
+            $table->string('url_link')->nullable();
             $table->json('gallery')->nullable();
             $table->decimal('price', 15, 2);
             $table->decimal('area_size', 15, 2);
@@ -39,10 +40,12 @@ return new class extends Migration
             $table->text('private_note')->nullable();
             $table->string('property_code')->unique();
             $table->json('property_documents')->nullable();
+            $table->boolean('featured')->default(false);
             $table->boolean('visibility')->default(true);
             $table->json('labels')->nullable();
             $table->json('features')->nullable();
             $table->json('additional_features')->nullable();
+
             $table->timestamps();
         });
     }

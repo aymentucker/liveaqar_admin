@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Company extends Model
+{
+    use HasFactory;
+    protected $fillable = [
+        'name',
+        'name_en',
+        'description',
+        'description_en',
+        'logo',
+        'email',
+        'whatsapp',
+        'phone_number',
+        'fax_number',
+        'license',
+        'website_url',
+        'social_media',
+        'address',
+    ];
+
+    protected $casts = [
+        'social_media' => 'array',
+    ];
+
+    public function reviews()
+    {
+        return $this->hasMany(CompanyReview::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(CompanyCategory::class);
+    }
+}

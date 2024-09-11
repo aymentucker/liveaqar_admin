@@ -18,5 +18,6 @@ class Ad extends Model
         'url',
         'start_date',
         'end_date',
+        'type',
     ];
 }

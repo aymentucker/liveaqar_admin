@@ -6,19 +6,19 @@
             <div class="navbar-brand-box">
                 <a href="index.html" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="assets/images/logo-dark-sm.png" alt="" height="26">
+                        <img src="{{ asset('assets/images/logo-dark-sm.png') }}" alt="" height="26">
                     </span>
                     <span class="logo-lg">
-                        <img src="assets/images/logo-dark-sm.png" alt="" height="26">
+                        <img src="{{ asset('assets/images/logo-dark-sm.png') }}" alt="" height="26">
                     </span>
                 </a>
 
                 <a href="index.html" class="logo logo-light">
                     <span class="logo-lg">
-                        <img src="assets/images/logo-light.png" alt="" height="30">
+                        <img src="{{ asset('assets/images/logo-light.png') }}" alt="" height="30">
                     </span>
                     <span class="logo-sm">
-                        <img src="assets/images/logo-light-sm.png" alt="" height="26">
+                        <img src="{{ asset('assets/images/logo-light-sm.png') }}" alt="" height="26">
                     </span>
                 </a>
             </div>
@@ -41,20 +41,20 @@
             <div class="dropdown d-inline-block language-switch ms-2">
                 <button type="button" class="btn header-item" data-bs-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
-                    <img class="header-lang-img" src="assets/images/flags/us.jpg" alt="Header Language"
+                    <img class="header-lang-img" src="{{ asset('assets/images/flags/us.jpg') }}" alt="Header Language"
                         height="18">
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
 
                     <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="eng">
-                        <img src="assets/images/flags/us.jpg" alt="user-image" class="me-1" height="12">
+                        <img src="{{ asset('assets/images/flags/us.jpg') }}" alt="user-image" class="me-1" height="12">
                         <span class="align-middle">English</span>
                     </a>
 
                     <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="sp">
-                        <img src="assets/images/flags/qatar.jpg" alt="user-image" class="me-1" height="12">
+                    <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="qa">
+                        <img src="{{ asset('assets/images/flags/qatar.jpg') }}" alt="user-image" class="me-1" height="12">
                         <span class="align-middle">Arabic</span>
                     </a>
 

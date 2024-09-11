@@ -5,19 +5,19 @@
 <div class="navbar-brand-box">
     <a href="index.html" class="logo logo-dark">
         <span class="logo-sm">
-            <img src="assets/images/logo-dark-sm.png" alt="" height="26">
+            <img src="{{ asset('assets/images/logo-dark-sm.png') }}" alt="" height="26">
         </span>
         <span class="logo-lg">
-            <img src="assets/images/logo-dark.png" alt="" height="28">
+            <img src="{{ asset('assets/images/logo-dark.png') }}" alt="" height="28">
         </span>
     </a>
 
     <a href="index.html" class="logo logo-light">
         <span class="logo-lg">
-            <img src="assets/images/logo-light.png" alt="" height="30">
+            <img src="{{ asset('assets/images/logo-light.png') }}" alt="" height="30">
         </span>
         <span class="logo-sm">
-            <img src="assets/images/logo-light-sm.png" alt="" height="26">
+            <img src="{{ asset('assets/images/logo-light-sm.png') }}" alt="" height="26">
         </span>
     </a>
 </div>
@@ -61,6 +61,20 @@
                     <li><a href="{{ route('cities.index') }}" data-key="t-cities">Cities</a></li>
                     <li><a href="{{ route('states.index') }}" data-key="t-states">States</a></li>
                     <li><a href="{{ route('reviews.index') }}" data-key="t-reviews">Reviews</a></li>
+
+                </ul>
+            </li>
+
+            <li>
+                <a href="javascript: void(0);" class="has-arrow">
+                    <i class="bx bx bx-folder-open icon nav-icon"></i>
+                    <span class="menu-item" data-key="t-realestate">Corporate Listings</span>
+                </a>
+                <ul class="sub-menu" aria-expanded="false">
+                    <li><a href="{{ route('companies.indexcorporate') }}" data-key="t-properties">Companies</a>
+                    </li>
+                    <li><a href="{{ route('categories.indexcorporate') }}" data-key="t-proprety-types">Categories</a></li>
+                    {{-- <li><a href="{{ route('reviews.indexcorporate') }}" data-key="t-reviews">Reviews</a></li> --}}
 
                 </ul>
             </li>
@@ -165,19 +179,19 @@
         <div class="navbar-brand-box">
             <a href="index.html" class="logo logo-dark">
                 <span class="logo-sm">
-                    <img src="assets/images/logo-dark-sm.png" alt="" height="26">
+                    <img src="{{ asset('assets/images/logo-dark-sm.png') }}" alt="" height="26">
                 </span>
                 <span class="logo-lg">
-                    <img src="assets/images/logo-dark.png" alt="" height="28">
+                    <img src="{{ asset('assets/images/logo-dark.png') }}" alt="" height="28">
                 </span>
             </a>
 
             <a href="index.html" class="logo logo-light">
                 <span class="logo-sm">
-                    <img src="assets/images/logo-light-sm.png" alt="" height="26">
+                    <img src="{{ asset('assets/images/logo-light-sm.png') }}" alt="" height="26">
                 </span>
                 <span class="logo-lg">
-                    <img src="assets/images/logo-light.png" alt="" height="30">
+                    <img src="{{ asset('assets/images/logo-light.png') }}" alt="" height="30">
                 </span>
             </a>
         </div>
@@ -200,20 +214,20 @@
         <div class="dropdown d-inline-block language-switch ms-2 ms-xl-3">
             <button type="button" class="btn header-item" data-bs-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <img class="header-lang-img" src="assets/images/flags/us.jpg" alt="Header Language"
+                <img class="header-lang-img" src="{{ asset('assets/images/flags/us.jpg') }}" alt="Header Language"
                     height="18">
             </button>
             <div class="dropdown-menu dropdown-menu-end">
 
                 <!-- item-->
                 <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="eng">
-                    <img src="assets/images/flags/us.jpg" alt="user-image" class="me-1"
+                    <img src="{{ asset('assets/images/flags/us.jpg') }}" alt="user-image" class="me-1"
                         height="12"> <span class="align-middle">English</span>
                 </a>
 
                 <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="sp">
-                    <img src="assets/images/flags/qatar.jpg" alt="user-image" class="me-1"
+                <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="qa">
+                    <img src="{{ asset('assets/images/flags/qatar.jpg') }}" alt="user-image" class="me-1"
                         height="12"> <span class="align-middle">Arabic</span>
                 </a>
 
@@ -263,7 +277,7 @@
                     <a href="#!" class="text-reset notification-item">
                         <div class="d-flex">
                             <div class="flex-shrink-0 me-3">
-                                <img src="assets/images/users/avatar-3.jpg"
+                                <img src="{{ asset('assets/images/users/avatar-3.jpg') }}"
                                     class="rounded-circle avatar-sm" alt="user-pic">
                             </div>
                             <div class="flex-grow-1">
@@ -291,7 +305,7 @@
             <button type="button" class="btn header-item user text-start d-flex align-items-center"
                 id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
-                <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-3.jpg"
+                <img class="rounded-circle header-profile-user" src="{{ asset('assets/images/users/avatar-3.jpg') }}"
                     alt="Header Avatar">
                 <span
                     class="d-none d-xl-inline-block ms-2 fw-medium font-size-15">kkk</span>
@@ -299,7 +313,7 @@
             <div class="dropdown-menu dropdown-menu-end pt-0">
                 <div class="p-3 border-bottom">
                     <h6 class="mb-0">ooo</h6>
-                    <p class="mb-0 font-size-11 text-muted">ooooooo</p>
+                    <p class="mb-0 font-size-11 text-muted">sss@aa.a</p>
                 </div>
                 <a class="dropdown-item" href="contacts-profile.html"><i
                         class="mdi mdi-account-circle text-muted font-size-16 align-middle me-2"></i> <span

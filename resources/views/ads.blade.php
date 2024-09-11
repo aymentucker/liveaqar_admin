@@ -51,7 +51,7 @@
                                         </th>
                                         <td>{{ $ad->id }}</td>
                                         <td>{{ $ad->title_en }}</td>
-                                        <td><img src="{{ asset('storage/' . $ad->image) }}" alt="image" width="100"></td>
+                                        <td><img src="{{$ad->image}}" alt="image" width="100"></td>
                                         <td>{{ $ad->end_date }}</td>
                                         <td>
                                             <ul class="list-inline mb-0">

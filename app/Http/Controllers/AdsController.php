@@ -28,11 +28,16 @@ class AdsController extends Controller
             'end_date' => 'required|date|after_or_equal:today',
         ]);
 
-        $validatedData['image'] = $request->file('image')->store('ads', 'public');
+        // Store the image and get the path
+        $path = $request->file('image')->store('ads', 'public');
+
+        // Generate a URL to the stored image
+        $validatedData['image'] = asset('storage/' . $path);
 
         Ad::create($validatedData);
         return redirect()->route('ads.index')->with('success', 'Ad created successfully!');
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -51,8 +56,13 @@ class AdsController extends Controller
             if ($ad->image) {
                 Storage::disk('public')->delete($ad->image);
             }
-            // Store the new image
-            $validatedData['image'] = $request->file('image')->store('ads', 'public');
+
+             // Store the image and get the path
+        $path = $request->file('image')->store('ads', 'public');
+
+        // Generate a URL to the stored image
+        $validatedData['image'] = asset('storage/' . $path);
+
         }
 
         $ad->update($validatedData);

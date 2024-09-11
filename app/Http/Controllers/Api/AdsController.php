@@ -1,26 +1,22 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\Service;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Ad;
+use App\Http\Resources\AdsCollection;
 
-class ServiceController extends Controller
+class AdsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
-    }
+        $adSliders = Ad::all();
+        return response()->json($adSliders);
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -34,15 +30,7 @@ class ServiceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Service $service)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Service $service)
+    public function show(string $id)
     {
         //
     }
@@ -50,7 +38,7 @@ class ServiceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Service $service)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -58,7 +46,7 @@ class ServiceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Service $service)
+    public function destroy(string $id)
     {
         //
     }

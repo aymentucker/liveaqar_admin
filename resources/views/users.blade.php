@@ -156,9 +156,9 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label">Position</label>
+                                    <label class="form-label">Role</label>
                                     <select class="form-select" name="role" required>
-                                        <option selected>Select Position</option>
+                                        <option selected>Select Role</option>
                                         <option value="user">User</option>
                                         <option value="admin">Admin</option>
                                         <option value="manager">Manager</option>
