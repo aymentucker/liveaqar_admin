@@ -8,85 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+
 
 class UsersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        return response()->json(User::all(), 200);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'username' => 'nullable|string|max:255|unique:users',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
-        ]);
-
-        $user = User::create([
-            'name' => $validated['name'],
-            'username' => $validated['username'],
-            'email' => $validated['email'],
-            'password' => Hash::make($validated['password']),
-        ]);
-
-        return response()->json($user, 201);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        $user = User::findOrFail($id);
-        return response()->json($user, 200);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        $user = User::findOrFail($id);
-
-        $validated = $request->validate([
-            'name' => 'sometimes|required|string|max:255',
-            'username' => 'sometimes|required|string|max:255|unique:users,username,' . $user->id,
-            'email' => 'sometimes|required|string|email|max:255|unique:users,email,' . $user->id,
-            'password' => 'sometimes|required|string|min:8',
-        ]);
-
-        if ($request->has('password')) {
-            $validated['password'] = Hash::make($validated['password']);
-        }
-
-        $user->update($validated);
-
-        return response()->json($user, 200);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        $user = User::findOrFail($id);
-        $user->delete();
-
-
-        return response()->json(null, 204);
-    }
-
-
-
 
     /**
      * Register a new regular user.
@@ -95,40 +21,49 @@ class UsersController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'phone_number' => 'required|string',
+            'username' => 'nullable|string|max:255|unique:users',
+            'phone' => 'nullable|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
-            // Add other fields as necessary
         ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
 
+        // Get the validated data
+        $data = $validator->validated();
+
+        // Set 'whatsapp' to be the same as 'phone'
+        $data['whatsapp'] = $data['phone'];
+
         $user = User::create([
             'name' => $request->name,
-            'phone_number' => $request->phone_number,
+            'username' => $request->username,
+            'phone' => $request->phone,
+            'whatsapp' => $data['whatsapp'], // This will be the same as 'phone'
             'email' => $request->email,
-            'user_type' => 'user',
+            'role' => 'user',
             'password' => Hash::make($request->password),
-            'status' => 'Active',
-            // Add other fields as necessary
         ]);
 
-        // Update the username to include the user ID for uniqueness
-        $user->username = $user->username . $user->id;
-        $user->save();
+        // Generate a username if not provided
+        if (!$user->username) {
+            $user->username = Str::slug($user->name) . $user->id;
+            $user->save();
+        }
 
-        // Automatically log in the user upon registration
+        // Create an authentication token
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
             'message' => 'User registered successfully',
-            'user' => $user->toArray(), // Ensure this contains 'id'
+            'user' => $user->makeHidden(['password', 'remember_token'])->toArray(),
             'access_token' => $token,
             'token_type' => 'Bearer',
         ]);
     }
+
 
     /**
      * Authenticate a user and return the token if the provided credentials are correct.
@@ -150,19 +85,15 @@ class UsersController extends Controller
             ], 401);
         }
 
-        // Load the user's profile to get the img_profile
-        $user->load('userProfile');
-
         // Generate a new token for the user
         $token = $user->createToken('auth_token')->plainTextToken;
 
         // Prepare the user data including the img_profile
         $userData = $user->toArray();
-        $userData['img_profile'] = $user->userProfile ? $user->userProfile->img_profile : null; // Add the img_profile to the user data
 
         return response()->json([
             'message' => 'User logged in successfully',
-            'user' => $userData, // Modified to include 'img_profile'
+            'user' => $userData,
             'access_token' => $token,
             'token_type' => 'Bearer',
         ]);
@@ -181,28 +112,33 @@ class UsersController extends Controller
     }
 
 
-    public function deleteUser($id)
+    /**
+     * Delete a user account.
+     */
+    public function deleteUser(Request $request, $id)
     {
-        // Authenticate the user. Ensure this endpoint is protected by middleware.
-        $currentUserId = Auth::id();
-        $currentUser = User::find($currentUserId);
+        $currentUser = Auth::user();
 
         if (!$currentUser) {
             return response()->json(['message' => 'Authentication required'], 401);
         }
 
-
-
-        // Find the user by id
         $user = User::findOrFail($id);
 
-        // Delete the user
+        if ($currentUser->id !== $user->id && $currentUser->role !== 'admin') {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+
         try {
+            // Revoke all tokens associated with the user
+            $user->tokens()->delete();
+
+            // Delete the user
             $user->delete();
-            return response()->json(['message' => 'User deleted successfully.'], 200);
+
+            return response()->json(['message' => 'User account deleted successfully.'], 200);
         } catch (\Exception $e) {
-            // Handle any exceptions, such as database errors
-            return response()->json(['message' => 'Failed to delete user', 'error' => $e->getMessage()], 500);
+            return response()->json(['message' => 'Failed to delete user account.', 'error' => $e->getMessage()], 500);
         }
     }
 
