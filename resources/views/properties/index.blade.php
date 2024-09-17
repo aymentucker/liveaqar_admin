@@ -115,10 +115,12 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label" for="city_id">City</label>
-                                                    <select class="form-select" id="city_id" name="city_id" onchange="updateStates()">
+                                                    <select class="form-select" id="city_id" name="city_id"
+                                                        onchange="updateStates()">
                                                         <option selected>Select City</option>
                                                         @foreach ($cities as $city)
-                                                            <option value="{{ $city->id }}">{{ $city->name_en }}</option>
+                                                            <option value="{{ $city->id }}">{{ $city->name_en }}
+                                                            </option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -140,7 +142,7 @@
                                                 <div class="mb-3">
                                                     <label class="form-label" for="address">Address</label>
                                                     <input type="text" class="form-control" id="address"
-                                                        name="address" placeholder="Enter address">
+                                                        name="address" placeholder="Enter address" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -153,9 +155,17 @@
 
                                             <div class="col-md-6">
                                                 <div class="mb-3">
-                                                    <label class="form-label" for="price">Price</label>
-                                                    <input type="text" class="form-control" id="price"
-                                                        name="price" placeholder="Enter Price">
+                                                    <label class="form-label" for="sell_price">Sell Price</label>
+                                                    <input type="text" class="form-control" id="sell_price"
+                                                        name="sell_price" placeholder="Enter Sell Price">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label" for="rent_price">Rent Price</label>
+                                                    <input type="text" class="form-control" id="rent_price"
+                                                        name="rent_price" placeholder="Enter Rent Price">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -177,7 +187,7 @@
                                                 <div class="mb-3">
                                                     <label class="form-label" for="phone">Phone</label>
                                                     <input type="phone" class="form-control" id="phone"
-                                                        name="phone" placeholder="Enter phone">
+                                                        name="phone" placeholder="Enter phone" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -198,7 +208,7 @@
                                                 <div class="mb-3">
                                                     <label class="form-label" for="garages">Featured Video</label>
                                                     <input type="url" class="form-control" id="featured_video"
-                                                        name="featured_video" placeholder="Enter featured video">
+                                                        name="featured_video" placeholder="Enter featured video" required>
                                                 </div>
                                             </div>
 
@@ -226,16 +236,20 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="mb-3">
-                                                    <label class="form-label" for="status_id">Property Status</label>
-                                                    <select class="form-select" id="status_id" name="status_id">
-                                                        <option selected>Select Status</option>
+                                                    <label class="form-label">Property Statuses</label>
+                                                    <div class="form-check">
                                                         @foreach ($propertyStatus as $status)
-                                                            <option value="{{ $status->id }}">{{ $status->name_en }}
-                                                            </option>
+                                                            <div class="form-check d-inline-block me-3">
+                                                                <input type="checkbox" class="form-check-input" id="status_{{ $status->id }}"
+                                                                    name="statuses[]" value="{{ $status->id }}">
+                                                                <label class="form-check-label" for="status_{{ $status->id }}">{{ $status->name_en }}</label>
+                                                            </div>
                                                         @endforeach
-                                                    </select>
+                                                    </div>
                                                 </div>
                                             </div>
+
+
                                             <div class="col-12 text-end mt-3">
                                                 <button type="button" class="btn btn-danger me-1"
                                                     data-bs-dismiss="modal"><i class="bx bx-x me-1 align-middle"></i>
@@ -308,7 +322,15 @@
                                                 </td>
                                                 <td data-column-id="title" class="gridjs-td">{{ $property->title_en }}
                                                 </td>
-                                                <td data-column-id="price" class="gridjs-td">{{ $property->price }}</td>
+
+                                                <td data-column-id="price" class="gridjs-td">
+                                                    <span class="d-block">Sell:
+                                                        {{ $property->sell_price ?? 'N/A' }}</span>
+                                                    <span class="d-block">Rent:
+                                                        {{ $property->rent_price ?? 'N/A' }}</span>
+                                                </td>
+
+
                                                 <td data-column-id="area_size" class="gridjs-td">
                                                     {{ $property->area_size }}</td>
                                                 <td data-column-id="visibility" class="gridjs-td">
@@ -329,11 +351,13 @@
                                                             </a>
                                                         </li>
                                                         <li class="list-inline-item">
-                                                            <a href="javascript:void(0);" data-bs-toggle="tooltip"
-                                                                data-bs-placement="top" title="Delete"
-                                                                class="px-2 text-danger">
-                                                                <i class="bx bx-trash-alt font-size-18"></i>
-                                                            </a>
+                                                            <form action="{{ route('properties.destroy', $property->id) }}" method="POST" onsubmit="return confirm('Are you sure?');" style="display: inline;">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-link px-2 text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                                    <i class="bx bx-trash-alt font-size-18"></i>
+                                                                </button>
+                                                            </form>
                                                         </li>
                                                     </ul>
                                                 </td>
@@ -361,8 +385,8 @@
     <!-- End Page-content -->
 
 
-       {{-- JavaScript to update States --}}
-       <script>
+    {{-- JavaScript to update States --}}
+    <script>
         function updateStates() {
             var cityId = document.getElementById('city_id').value; // Use cityId instead of cityName
             var stateSelect = document.getElementById('state_id');
@@ -378,5 +402,12 @@
                     });
                 });
         }
+        document.getElementById('addPropertyForm').addEventListener('submit', function(event) {
+        const checkedStatuses = document.querySelectorAll('input[name="statuses[]"]:checked');
+        if (checkedStatuses.length === 0) {
+            alert('Please select at least one property status.');
+            event.preventDefault();
+        }
+    });
     </script>
 @endsection

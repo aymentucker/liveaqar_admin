@@ -29,33 +29,22 @@
                         <table class="table table-nowrap align-middle">
                             <thead class="table-light">
                                 <tr>
-                                    <th scope="col" class="ps-4" style="width: 50px;">
-                                        <div class="form-check font-size-16">
-                                            <input type="checkbox" class="form-check-input" id="contacusercheck">
-                                            <label class="form-check-label" for="contacusercheck"></label>
-                                        </div>
-                                    </th>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">English Name</th>
-                                    <th scope="col">Arabic Name</th>
+                                    <th>ID</th>
+                                    <th>English Name</th>
+                                    <th>Arabic Name</th>
+                                    <th>Image</th>
 
-                                    <th scope="col" style="width: 200px;">Action</th>
+                                    <th style="width: 200px;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($categories as $category)
                                     <tr>
-                                        <th scope="row" class="ps-4">
-                                            <div class="form-check font-size-16">
-                                                <input type="checkbox" class="form-check-input" id="contacusercheck8">
-                                                <label class="form-check-label" for="contacusercheck8"></label>
-                                            </div>
-                                        </th>
                                         <td>{{ $category->id }}</td>
-
                                         <td>{{ $category->name_en }}</td>
                                         <td>{{ $category->name }}</td>
                                         <td><img src="{{ $category->image }}" alt="image" width="100"></td>
+
                                         <td>
                                             <ul class="list-inline mb-0">
                                                 <li class="list-inline-item">
@@ -64,12 +53,6 @@
                                                     onclick="openModal({{ $category->toJson() }})">
                                                         <i class="bx bx-pencil font-size-18"></i>
                                                     </a>
-
-                                                    {{-- <a href="javascript:void(0);" data-bs-toggle="tooltip"
-                                                        data-bs-placement="top" title="Edit" class="px-2 text-primary"
-                                                        onclick="openModal({{ $category }})">
-                                                        <i class="bx bx-pencil font-size-18"></i>
-                                                    </a> --}}
                                                 </li>
                                                 <li class="list-inline-item">
                                                     <form action="{{ route('categories.destroycorporate', $category->id) }}"
@@ -95,7 +78,7 @@
     </div>
 
     <!-- Modal for Adding/Editing Category -->
-    <form id="category-form" action="{{ route('categories.storecorporate') }}" method="POST">
+    <form id="category-form" action="{{ route('categories.storecorporate') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="modal fade category-modal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
             aria-hidden="true">
@@ -123,14 +106,12 @@
                             </div>
                         </div>
                         <div class="row">
-
                             <div class="col-md-12">
                                 <div class="mb-3">
                                     <label class="form-label" for="category-image">Image</label>
-                                    <input type="file" class="form-control" id="category-image" name="image"
-                                        required>
+                                    <input type="file" class="form-control" id="category-image" name="image">
                                 </div>
-                                <div id="image-preview" class="mt-2"></div> <!-- Placeholder for image preview -->
+                                <div id="image-preview" class="mt-2"></div>
                             </div>
                         </div>
                         <div class="row mt-2">
@@ -144,16 +125,15 @@
                             </div>
                         </div>
                     </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
+                </div>
+            </div>
+        </div>
     </form>
 @endsection
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         function openModal(category = null) {
-            console.log(category); // Debugging output
             const modalTitle = document.getElementById('modal-title');
             const form = document.getElementById('category-form');
             const arabicNameInput = document.getElementById('category-name-ar');
@@ -181,7 +161,7 @@
                 arabicNameInput.value = category.name;
                 englishNameInput.value = category.name_en;
                 if (category.image) {
-                    imagePreview.innerHTML = `<img src="/storage/${category.image}" alt="Current Image" width="100">`;
+                    imagePreview.innerHTML = `<img src="${category.image}" alt="Current Image" width="100">`;
                 }
                 imageInput.required = false; // Make image optional for edits
             } else {
@@ -193,5 +173,4 @@
             modal.show();
         }
     });
-    </script>
-
+</script>

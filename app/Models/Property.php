@@ -17,14 +17,14 @@ class Property extends Model
         'description_en',
         'description_ar',
         'type_id',
-        'status_id',
         'city_id',
         'state_id',
         'featured_image',
         'featured_video',
         'url_link',
         'gallery',
-        'price',
+        'sell_price',
+        'rent_price',
         'area_size',
         'master_rooms',
         'rooms',
@@ -49,17 +49,19 @@ class Property extends Model
         'labels' => 'array',
         'features' => 'array',
         'additional_features' => 'array',
+        'sell_price' => 'decimal:2',
+        'rent_price' => 'decimal:2',
     ];
 
     public function property_type()
-{
-    return $this->belongsTo(PropertyType::class, 'type_id');
-}
+    {
+        return $this->belongsTo(PropertyType::class, 'type_id');
+    }
 
-public function property_status()
-{
-    return $this->belongsTo(PropertyStatus::class, 'status_id');
-}
+    public function property_status()
+    {
+        return $this->belongsTo(PropertyStatus::class, 'status_id');
+    }
 
 
     public function city()
@@ -96,6 +98,10 @@ public function property_status()
 
     public function agency()
     {
-        return $this->belongsTo(Agency::class , 'agency_id');
+        return $this->belongsTo(Agency::class, 'agency_id');
+    }
+    public function statuses()
+    {
+        return $this->belongsToMany(PropertyStatus::class, 'property_property_status', 'property_id', 'status_id');
     }
 }

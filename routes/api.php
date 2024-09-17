@@ -24,12 +24,20 @@ Route::get('/user', function (Request $request) {
 
 // Property Routes
 Route::get('/properties', [PropertiesController::class, 'index']);
-Route::get('/properties/{id}', [PropertiesController::class, 'show']);
+// Route::get('/properties/{id}', [PropertiesController::class, 'show']);
 Route::post('/properties', [PropertiesController::class, 'store']);
 Route::put('/properties/{id}', [PropertiesController::class, 'update']);
 Route::delete('/properties/{id}', [PropertiesController::class, 'destroy']);
 Route::get('/properties-agency/{agencyId}', [PropertiesController::class, 'fetchPropertiesForAgency']);
-Route::post('/properties/filter', [PropertiesController::class, 'filter'])->name('properties.filter');
+Route::get('/properties/search', [PropertiesController::class, 'search']);
+
+Route::post('/properties/filter', [PropertiesController::class, 'filter']);
+
+Route::get('/property-types', [PropertiesController::class, 'getPropertyTypes']);
+Route::get('/property-statuses', [PropertiesController::class, 'getPropertyStatuses']);
+Route::get('/states', [PropertiesController::class, 'getStates']);
+Route::get('/agencies', [PropertiesController::class, 'getAgencies']);
+
 
 
 // Post Routes

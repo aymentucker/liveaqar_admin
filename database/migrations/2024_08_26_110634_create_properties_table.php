@@ -20,14 +20,14 @@ return new class extends Migration
             $table->text('description_en');
             $table->text('description_ar');
             $table->foreignId('type_id')->constrained('property_types');
-            $table->foreignId('status_id')->constrained('property_statuses');
             $table->foreignId('city_id')->constrained('cities');
             $table->foreignId('state_id')->constrained('states');
             $table->string('featured_image')->nullable();
             $table->string('featured_video')->nullable();
             $table->string('url_link')->nullable();
             $table->json('gallery')->nullable();
-            $table->decimal('price', 15, 2);
+            $table->decimal('sell_price', 15, 2)->nullable();
+            $table->decimal('rent_price', 15, 2)->nullable();
             $table->decimal('area_size', 15, 2);
             $table->integer('master_rooms')->nullable();
             $table->integer('rooms');

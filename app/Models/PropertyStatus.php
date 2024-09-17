@@ -12,7 +12,7 @@ class PropertyStatus extends Model
 
     public function properties()
     {
-        return $this->hasMany(Property::class);
+        return $this->belongsToMany(Property::class, 'property_property_status', 'status_id', 'property_id');
     }
 
 }
