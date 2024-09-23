@@ -17,14 +17,6 @@ use App\Http\Controllers\CityStateController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\AdsController;
 use App\Http\Controllers\CompaniesController;
-use App\Http\Controllers\NotificationController;
-
-
-
-
-Route::get('/send-notification', [NotificationController::class, 'sendTestNotification']);
-
-
 
 
 // Resource routes for UsersController
