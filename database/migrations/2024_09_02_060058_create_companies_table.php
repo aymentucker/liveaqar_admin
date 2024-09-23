@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->nullable()->constrained('company_categories')->onDelete('set null');
             $table->string('name');
             $table->string('name_en');
 

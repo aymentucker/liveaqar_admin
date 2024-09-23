@@ -17,6 +17,13 @@ use App\Http\Controllers\CityStateController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\AdsController;
 use App\Http\Controllers\CompaniesController;
+use App\Http\Controllers\NotificationController;
+
+
+
+
+Route::get('/send-notification', [NotificationController::class, 'sendTestNotification']);
+
 
 
 
@@ -30,6 +37,11 @@ Route::resource('/property-status', PropertyStatusController::class);
 
 // Resource routes for PropertiesController
 Route::resource('/properties', PropertiesController::class);
+
+
+// route for edit property
+Route::get('/properties/{property}/edit', [PropertiesController::class, 'edit'])->name('properties.edit');
+
 
 // Resource routes for CategoriesController
 Route::resource('/categories', CategoriesController::class);

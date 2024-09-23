@@ -13,12 +13,18 @@ class CompanySeeder extends Seeder
     {
         $faker = Faker::create();
 
-        // Get all category IDs from the CompanyCategory table
-        $categoryIds = CompanyCategory::pluck('id')->toArray();
+        // Get all sub-category IDs (categories that have a parent_id)
+        $subCategoryIds = CompanyCategory::whereNotNull('parent_id')->pluck('id')->toArray();
+
+        // Ensure we have sub-categories to attach companies to
+        if (empty($subCategoryIds)) {
+            $this->command->info('No sub-categories found. Please run the CompanyCategorySeeder first.');
+            return;
+        }
 
         for ($i = 0; $i < 50; $i++) { // Generate 50 companies
-            Company::create([
-                'category_id' => $faker->randomElement($categoryIds),
+            // Create company data
+            $companyData = [
                 'name' => $faker->company,
                 'name_en' => $faker->company,
                 'description' => $faker->paragraph,
@@ -36,7 +42,14 @@ class CompanySeeder extends Seeder
                     'linkedin' => $faker->url
                 ]),
                 'address' => $faker->address,
-            ]);
+            ];
+
+            // Create the company
+            $company = Company::create($companyData);
+
+            // Attach the company to 1 to 3 random sub-categories
+            $randomSubCategoryIds = $faker->randomElements($subCategoryIds, rand(1, 3));
+            $company->categories()->attach($randomSubCategoryIds);
         }
     }
 }

@@ -33,8 +33,17 @@ class Company extends Model
         return $this->hasMany(CompanyReview::class);
     }
 
-    public function category()
-    {
-        return $this->belongsTo(CompanyCategory::class);
-    }
+     // Relationship to sub-categories
+     public function categories()
+     {
+         return $this->belongsToMany(CompanyCategory::class, 'company_company_category');
+     }
+
+     // Accessor to get main categories through sub-categories
+     public function getMainCategoriesAttribute()
+     {
+         return $this->categories->map(function ($category) {
+             return $category->parent;
+         })->unique()->filter();
+     }
 }

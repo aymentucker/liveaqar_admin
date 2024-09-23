@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('company_categories', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('parent_id')->nullable()->constrained('company_categories')->onDelete('set null');
             $table->string('name');
             $table->string('name_en');
-
             $table->string('image')->nullable();
             $table->timestamps();
         });

@@ -3,6 +3,7 @@
 @section('title', 'Categories List')
 
 @section('content')
+    <!-- Header Section -->
     <div class="row align-items-center">
         <div class="col-md-6">
             <div class="mb-3">
@@ -13,14 +14,15 @@
 
         <div class="col-md-6">
             <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
-                <a href="#" data-bs-toggle="modal" data-bs-target=".category-modal" class="btn btn-primary"
-                    onclick="openModal()">
+                <!-- Add New Category Button -->
+                <a href="#" class="btn btn-primary" onclick="openModal()">
                     <i class="bx bx-plus me-1"></i> Add New
                 </a>
             </div>
         </div>
     </div>
 
+    <!-- Categories Table -->
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
@@ -33,34 +35,49 @@
                                     <th>English Name</th>
                                     <th>Arabic Name</th>
                                     <th>Image</th>
-
+                                    <th>Main Category</th>
                                     <th style="width: 200px;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <!-- Loop through Main Categories -->
                                 @foreach ($categories as $category)
                                     <tr>
                                         <td>{{ $category->id }}</td>
                                         <td>{{ $category->name_en }}</td>
                                         <td>{{ $category->name }}</td>
-                                        <td><img src="{{ $category->image }}" alt="image" width="100"></td>
-
                                         <td>
+                                            @if($category->image)
+                                                <img src="{{ asset('storage/' . $category->image) }}" alt="image" width="100">
+                                            @else
+                                                --
+                                            @endif
+                                        </td>
+                                        <td>--</td> <!-- No main category for main categories -->
+                                        <td>
+                                            <!-- Action Buttons -->
                                             <ul class="list-inline mb-0">
                                                 <li class="list-inline-item">
-                                                    <a href="javascript:void(0);" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" title="Edit" class="px-2 text-primary"
-                                                    onclick="openModal({{ $category->toJson() }})">
+                                                    <!-- Edit Button -->
+                                                    <a href="javascript:void(0);" class="px-2 text-primary"
+                                                       onclick="openModal({{ json_encode([
+                                                           'id' => $category->id,
+                                                           'name' => $category->name,
+                                                           'name_en' => $category->name_en,
+                                                           'parent_id' => $category->parent_id,
+                                                           'image_url' => $category->image ? asset('storage/' . $category->image) : null
+                                                       ]) }})">
                                                         <i class="bx bx-pencil font-size-18"></i>
                                                     </a>
                                                 </li>
                                                 <li class="list-inline-item">
+                                                    <!-- Delete Form -->
                                                     <form action="{{ route('categories.destroycorporate', $category->id) }}"
-                                                        method="POST" style="display: inline;">
+                                                          method="POST" style="display: inline;">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="px-2 text-danger"
-                                                            style="background: none; border: none;">
+                                                                style="background: none; border: none;">
                                                             <i class="bx bx-trash-alt font-size-18"></i>
                                                         </button>
                                                     </form>
@@ -68,6 +85,53 @@
                                             </ul>
                                         </td>
                                     </tr>
+                                    <!-- Loop through Subcategories -->
+                                    @foreach ($category->children as $subCategory)
+                                        <tr>
+                                            <td>{{ $subCategory->id }}</td>
+                                            <!-- Indent Subcategory Names -->
+                                            <td>&nbsp;&nbsp;&nbsp;{{ $subCategory->name_en }}</td>
+                                            <td>&nbsp;&nbsp;&nbsp;{{ $subCategory->name }}</td>
+                                            <td>
+                                                @if($subCategory->image)
+                                                    <img src="{{ asset('storage/' . $subCategory->image) }}" alt="image" width="100">
+                                                @else
+                                                    --
+                                                @endif
+                                            </td>
+                                            <td>{{ $category->name_en }}</td> <!-- Display Main Category Name -->
+                                            <td>
+                                                <!-- Action Buttons -->
+                                                <ul class="list-inline mb-0">
+                                                    <li class="list-inline-item">
+                                                        <!-- Edit Button -->
+                                                        <a href="javascript:void(0);" class="px-2 text-primary"
+                                                           onclick="openModal({{ json_encode([
+                                                               'id' => $subCategory->id,
+                                                               'name' => $subCategory->name,
+                                                               'name_en' => $subCategory->name_en,
+                                                               'parent_id' => $subCategory->parent_id,
+                                                               'image_url' => $subCategory->image ? asset('storage/' . $subCategory->image) : null
+                                                           ]) }})">
+                                                            <i class="bx bx-pencil font-size-18"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <!-- Delete Form -->
+                                                        <form action="{{ route('categories.destroycorporate', $subCategory->id) }}"
+                                                              method="POST" style="display: inline;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="px-2 text-danger"
+                                                                    style="background: none; border: none;">
+                                                                <i class="bx bx-trash-alt font-size-18"></i>
+                                                            </button>
+                                                        </form>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 @endforeach
                             </tbody>
                         </table>
@@ -89,7 +153,9 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                        <!-- Form Fields -->
                         <div class="row">
+                            <!-- Arabic Name -->
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label" for="category-name-ar">Arabic Name</label>
@@ -97,6 +163,7 @@
                                         id="category-name-ar" name="name" required>
                                 </div>
                             </div>
+                            <!-- English Name -->
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label" for="category-name-en">English Name</label>
@@ -106,14 +173,28 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <!-- Main Category Select -->
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label" for="parent-category">Main Category</label>
+                                    <select class="form-control" id="parent-category" name="parent_id">
+                                        <option value="">None (This is a main category)</option>
+                                        @foreach($mainCategories as $mainCategory)
+                                            <option value="{{ $mainCategory->id }}">{{ $mainCategory->name_en }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Image Upload -->
+                            <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label" for="category-image">Image</label>
                                     <input type="file" class="form-control" id="category-image" name="image">
+                                    <div id="image-preview" class="mt-2"></div>
                                 </div>
-                                <div id="image-preview" class="mt-2"></div>
                             </div>
                         </div>
+                        <!-- Modal Footer Buttons -->
                         <div class="row mt-2">
                             <div class="col-12 text-end">
                                 <button type="button" class="btn btn-danger me-1" data-bs-dismiss="modal">
@@ -124,6 +205,7 @@
                                 </button>
                             </div>
                         </div>
+                        <!-- End of Form Fields -->
                     </div>
                 </div>
             </div>
@@ -131,46 +213,60 @@
     </form>
 @endsection
 
+<!-- JavaScript Section -->
+@push('scripts')
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        function openModal(category = null) {
-            const modalTitle = document.getElementById('modal-title');
-            const form = document.getElementById('category-form');
-            const arabicNameInput = document.getElementById('category-name-ar');
-            const englishNameInput = document.getElementById('category-name-en');
-            const imageInput = document.getElementById('category-image');
-            const imagePreview = document.getElementById('image-preview');
+    function openModal(category = null) {
+        const modalTitle = document.getElementById('modal-title');
+        const form = document.getElementById('category-form');
+        const arabicNameInput = document.getElementById('category-name-ar');
+        const englishNameInput = document.getElementById('category-name-en');
+        const parentCategorySelect = document.getElementById('parent-category');
+        const imageInput = document.getElementById('category-image');
+        const imagePreview = document.getElementById('image-preview');
 
-            form.reset();
-            imagePreview.innerHTML = '';
+        // Reset the form and image preview
+        form.reset();
+        imagePreview.innerHTML = '';
 
-            const methodInput = form.querySelector('input[name="_method"]');
-            if (methodInput) {
-                methodInput.remove();
-            }
-
-            if (category) {
-                modalTitle.textContent = 'Edit Category';
-                form.action = `/corporate/categories/${category.id}`;
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = '_method';
-                input.value = 'PUT';
-                form.appendChild(input);
-
-                arabicNameInput.value = category.name;
-                englishNameInput.value = category.name_en;
-                if (category.image) {
-                    imagePreview.innerHTML = `<img src="${category.image}" alt="Current Image" width="100">`;
-                }
-                imageInput.required = false; // Make image optional for edits
-            } else {
-                modalTitle.textContent = 'Add New';
-                form.action = '{{ route('categories.storecorporate') }}';
-            }
-
-            const modal = new bootstrap.Modal(document.querySelector('.category-modal'));
-            modal.show();
+        // Remove _method input if it exists
+        const methodInput = form.querySelector('input[name="_method"]');
+        if (methodInput) {
+            methodInput.remove();
         }
-    });
+
+        if (category) {
+            // Edit Mode
+            modalTitle.textContent = 'Edit Category';
+            form.action = `/corporate/categories/${category.id}`;
+            // Add hidden _method input for PUT request
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = '_method';
+            input.value = 'PUT';
+            form.appendChild(input);
+
+            // Populate form fields with existing data
+            arabicNameInput.value = category.name;
+            englishNameInput.value = category.name_en;
+            parentCategorySelect.value = category.parent_id || '';
+
+            // Display existing image
+            if (category.image_url) {
+                imagePreview.innerHTML = `<img src="${category.image_url}" alt="Current Image" width="100">`;
+            }
+            imageInput.required = false; // Image is optional when editing
+        } else {
+            // Add Mode
+            modalTitle.textContent = 'Add New';
+            form.action = '{{ route('categories.storecorporate') }}';
+            parentCategorySelect.value = ''; // Default to no parent
+            imageInput.required = true; // Image is required when adding
+        }
+
+        // Show the modal
+        const modal = new bootstrap.Modal(document.querySelector('.category-modal'));
+        modal.show();
+    }
 </script>
+@endpush
