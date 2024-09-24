@@ -11,9 +11,19 @@ use Illuminate\Http\Request;
 
 class PropertiesController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $properties = Property::all();
+        $query = Property::with('statuses')->orderBy('created_at', 'desc');
+
+        // Handle search by title
+        if ($request->has('search') && $request->search != '') {
+            $searchTerm = $request->search;
+            $query->where('title_en', 'LIKE', '%' . $searchTerm . '%')
+                ->orWhere('title_ar', 'LIKE', '%' . $searchTerm . '%');
+        }
+
+        $properties = $query->paginate(10);
+
         $cities = City::all();
         $states = State::all();
         $propertyType = PropertyType::all();
@@ -21,6 +31,16 @@ class PropertiesController extends Controller
 
         return view('properties.index', compact('properties', 'cities', 'states', 'propertyType', 'propertyStatus'));
     }
+
+
+    public function toggleVisibility(Property $property)
+    {
+        $property->visibility = !$property->visibility;
+        $property->save();
+
+        return redirect()->back()->with('success', 'Property visibility updated successfully!');
+    }
+
 
     public function store(Request $request)
     {
@@ -38,15 +58,24 @@ class PropertiesController extends Controller
             'bathrooms' => 'nullable|integer',
             'garages' => 'nullable|integer',
             'area_size' => 'nullable|numeric',
-            'featured_video' => 'required|url',
+            'featured_video' => 'nullable|url',
             'type_id' => 'required|exists:property_types,id',
             'property_code' => 'required|string|unique:properties,property_code',
-            'statuses' => 'required|array',
+            'phone' => 'required|string',
+            'year_built' => 'nullable|integer',
+            'statuses' => 'required|array|min:1',
             'statuses.*' => 'exists:property_statuses,id',
         ]);
 
+        // Extract statuses from validated data
+        $statuses = $validatedData['statuses'];
+        unset($validatedData['statuses']);
+
+        // Create the property
         $property = Property::create($validatedData);
-        $property->statuses()->attach($validatedData['statuses']);
+
+        // Attach statuses
+        $property->statuses()->attach($statuses);
 
         return redirect()->route('properties.index')->with('success', 'Property created successfully!');
     }
@@ -58,6 +87,9 @@ class PropertiesController extends Controller
             'title_ar' => 'required|string|max:255',
             'description_en' => 'nullable|string',
             'description_ar' => 'nullable|string',
+            'city_id' => 'required|exists:cities,id',
+            'state_id' => 'required|exists:states,id',
+            'address' => 'required|string',
             'sell_price' => 'nullable|numeric',
             'rent_price' => 'nullable|numeric',
             'rooms' => 'nullable|integer',
@@ -67,21 +99,33 @@ class PropertiesController extends Controller
             'featured_video' => 'nullable|url',
             'type_id' => 'required|exists:property_types,id',
             'property_code' => 'required|string|unique:properties,property_code,' . $property->id,
-            'statuses' => 'required|array',
+            'phone' => 'required|string',
+            'year_built' => 'nullable|integer',
+            'statuses' => 'required|array|min:1',
             'statuses.*' => 'exists:property_statuses,id',
         ]);
 
+        // Extract statuses from validated data
+        $statuses = $validatedData['statuses'];
+        unset($validatedData['statuses']);
+
+        // Update the property
         $property->update($validatedData);
-        $property->statuses()->sync($validatedData['statuses']);
+
+        // Sync statuses
+        $property->statuses()->sync($statuses);
 
         return redirect()->route('properties.index')->with('success', 'Property updated successfully!');
     }
 
     public function destroy(Property $property)
     {
+        // Detach all associated statuses
+        $property->statuses()->detach();
+
+        // Delete the property
         $property->delete();
+
         return redirect()->route('properties.index')->with('success', 'Property deleted successfully!');
     }
-
-
 }

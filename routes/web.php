@@ -54,6 +54,10 @@ Route::middleware(['auth'])->group(function () {
     // Resource routes for PropertiesController
     Route::resource('/properties', PropertiesController::class);
 
+    // route for toggle-visibility of property
+    Route::put('/properties/{property}/toggle-visibility', [PropertiesController::class, 'toggleVisibility'])->name('properties.toggleVisibility');
+
+
     // Resource routes for CategoriesController
     Route::resource('/categories', CategoriesController::class);
 
