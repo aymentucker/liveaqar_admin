@@ -17,114 +17,122 @@ use App\Http\Controllers\CityStateController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\AdsController;
 use App\Http\Controllers\CompaniesController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\NotificationController;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application.
+|
+*/
+
+// Include the authentication routes provided by Laravel
+require __DIR__ . '/auth.php';
+
+// Logout route (should be accessible only to authenticated users)
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('logout');
+
+// Routes that require authentication
+Route::middleware(['auth'])->group(function () {
+
+    // Index route (dashboard)
+    Route::get('/', function () {
+        return view('index');
+    })->name('index');
+
+    // Resource routes for UsersController
+    Route::resource('/users', UsersController::class);
+
+    // Resource routes for PropertyStatusController
+    Route::resource('/property-status', PropertyStatusController::class);
+
+    // Resource routes for PropertiesController
+    Route::resource('/properties', PropertiesController::class);
+
+    // Resource routes for CategoriesController
+    Route::resource('/categories', CategoriesController::class);
+
+    // Resource routes for PropertyTypesController
+    Route::resource('/property-types', PropertyTypesController::class);
+
+    // Resource routes for PropertyFeaturesController
+    Route::resource('/property-features', PropertyFeaturesController::class);
+
+    // Resource routes for CommentsController
+    Route::resource('/comments', CommentsController::class);
+
+    // Resource routes for AdsController
+    Route::resource('/ads', AdsController::class);
+
+    // Resource routes for PartnerController
+    Route::resource('/partners', PartnerController::class);
+
+    // Resource routes for PostsController
+    Route::resource('/posts', PostsController::class);
+
+    // Resource routes for ReviewsController
+    Route::resource('/reviews', ReviewsController::class);
+
+    // Resource routes for AgentsController
+    Route::resource('/agents', AgentsController::class);
+
+    // Resource routes for AgenciesController
+    Route::resource('/agencies', AgenciesController::class);
+
+    // Resource routes for NotificationController
+
+    Route::resource('notifications', NotificationController::class);
 
 
-// Resource routes for UsersController
-Route::resource('/users', UsersController::class);
+    // CityStateController routes for City
+    Route::controller(CityStateController::class)->group(function () {
+        Route::get('/cities', 'indexCity')->name('cities.index');
+        Route::post('/cities', 'storeCity')->name('cities.store');
+        Route::put('/cities/{city}', 'updateCity')->name('cities.update');
+        Route::delete('/cities/{city}', 'destroyCity')->name('cities.destroy');
+    });
 
+    // CityStateController routes for State
+    Route::controller(CityStateController::class)->group(function () {
+        Route::get('/states', 'indexState')->name('states.index');
+        Route::post('/states', 'storeState')->name('states.store');
+        Route::put('/states/{state}', 'updateState')->name('states.update');
+        Route::delete('/states/{state}', 'destroyState')->name('states.destroy');
+    });
 
-// Resource routes for PropertiesController
-Route::resource('/property-status', PropertyStatusController::class);
+    // Get route for getStatesForCity
+    Route::get('/states-for-city/{cityId}', [CityStateController::class, 'getStatesForCity']);
 
+    // Corporate routes
+    Route::prefix('corporate')->group(function () {
 
-// Resource routes for PropertiesController
-Route::resource('/properties', PropertiesController::class);
+        // Companies Routes
+        Route::get('/companies', [CompaniesController::class, 'index'])->name('companies.indexcorporate');
+        Route::post('/companies', [CompaniesController::class, 'store'])->name('companies.storecorporate');
+        Route::put('/companies/{company}', [CompaniesController::class, 'update'])->name('companies.updatecorporate');
+        Route::delete('/companies/{company}', [CompaniesController::class, 'destroy'])->name('companies.destroycorporate');
 
+        // Categories Routes
+        Route::get('/categories', [CompaniesController::class, 'indexCategory'])->name('categories.indexcorporate');
+        Route::post('/categories', [CompaniesController::class, 'storeCategory'])->name('categories.storecorporate');
+        Route::put('/categories/{category}', [CompaniesController::class, 'updateCategory'])->name('categories.updatecorporate');
+        Route::delete('/categories/{category}', [CompaniesController::class, 'destroyCategory'])->name('categories.destroycorporate');
 
-// route for edit property
-Route::get('/properties/{property}/edit', [PropertiesController::class, 'edit'])->name('properties.edit');
+        // Reviews Routes
+        Route::get('/reviews', [CompaniesController::class, 'indexReview'])->name('reviews.indexcorporate');
+        Route::post('/reviews', [CompaniesController::class, 'storeReview'])->name('reviews.storecorporate');
+        Route::put('/reviews/{review}', [CompaniesController::class, 'updateReview'])->name('reviews.updatecorporate');
+        Route::delete('/reviews/{review}', [CompaniesController::class, 'destroyReview'])->name('reviews.destroycorporate');
 
+    });
 
-// Resource routes for CategoriesController
-Route::resource('/categories', CategoriesController::class);
-
-// Resource routes for PropertyTypesController
-Route::resource('/property-types', PropertyTypesController::class);
-
-// Resource routes for FeatureController
-Route::resource('/property-features', PropertyFeaturesController::class);
-
-// Resource routes for CommentsController
-Route::resource('/comments', CommentsController::class);
-
-
-// Resource routes for Ads
-Route::resource('/ads', AdsController::class);
-
-// Resource routes for Partners
-Route::resource('/partners', PartnerController::class);
-
-
-// Resource routes for Posts
-Route::resource('/posts', PostsController::class);
-
-
-// Resource routes for ReviewsController
-Route::resource('/reviews', ReviewsController::class);
-
-
-// Resource routes for AgentsController
-Route::resource('/agents', AgentsController::class);
-
-// Resource routes for AgenciesController
-Route::resource('/agencies', AgenciesController::class);
-
-
-
-// Resource routes for CityStateController => City
-Route::controller(CityStateController::class)->group(function () {
-    Route::get('/cities', 'indexCity')->name('cities.index');
-    Route::post('/cities', 'storeCity')->name('cities.store');
-    Route::put('/cities/{city}', 'updateCity')->name('cities.update');
-    Route::delete('/cities/{city}', 'destroyCity')->name('cities.destroy');
-});
-// Resource routes for CityStateController => State
-Route::controller(CityStateController::class)->group(function () {
-    Route::get('/states', 'indexState')->name('states.index');
-    Route::post('/states', 'storeState')->name('states.store');
-    Route::put('/states/{city}', 'updateState')->name('states.update');
-    Route::delete('/states/{city}', 'destroyState')->name('states.destroy');
-
-});
-
-// Get route for getStatesForCity
-Route::get('/states-for-city/{cityId}', [CityStateController::class, 'getStatesForCity']);
-
-
-Route::prefix('corporate')->group(function () {
-
-    // Companies Routes
-    Route::get('/companies', [CompaniesController::class, 'index'])->name('companies.indexcorporate');
-    Route::post('/companies', [CompaniesController::class, 'store'])->name('companies.storecorporate');
-    Route::put('/companies/{company}', [CompaniesController::class, 'update'])->name('companies.updatecorporate');
-    Route::delete('/companies/{company}', [CompaniesController::class, 'destroy'])->name('companies.destroycorporate');
-
-    // Categories Routes
-    Route::get('/categories', [CompaniesController::class, 'indexCategory'])->name('categories.indexcorporate');
-    Route::post('/categories', [CompaniesController::class, 'storeCategory'])->name('categories.storecorporate');
-    Route::put('/categories/{category}', [CompaniesController::class, 'updateCategory'])->name('categories.updatecorporate');
-    Route::delete('/categories/{category}', [CompaniesController::class, 'destroyCategory'])->name('categories.destroycorporate');
-
-    // Reviews Routes
-    Route::get('/reviews', [CompaniesController::class, 'indexReview'])->name('reviews.indexcorporate');
-    Route::post('/reviews', [CompaniesController::class, 'storeReview'])->name('reviews.storecorporate');
-    Route::put('/reviews/{review}', [CompaniesController::class, 'updateReview'])->name('reviews.updatecorporate');
-    Route::delete('/reviews/{review}', [CompaniesController::class, 'destroyReview'])->name('reviews.destroycorporate');
-
-});
-
-
-Route::get('/', function () {
-    return view('index');
-})->middleware(['auth', 'verified'])->name('index');
-
-
-Route::middleware('auth')->group(function () {
+    // Profile routes
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-require __DIR__ . '/auth.php';
-
-

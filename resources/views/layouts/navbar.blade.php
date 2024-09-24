@@ -1,24 +1,24 @@
-
+<!-- nav.blade.php -->
 <header id="page-topbar" class="isvertical-topbar">
     <div class="navbar-header">
         <div class="d-flex">
             <!-- LOGO -->
             <div class="navbar-brand-box">
-                <a href="index.html" class="logo logo-dark">
+                <a href="{{ route('index') }}" class="logo logo-dark">
                     <span class="logo-sm">
                         <img src="{{ asset('assets/images/logo-dark-sm.png') }}" alt="" height="26">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ asset('assets/images/logo-dark-sm.png') }}" alt="" height="26">
+                        <img src="{{ asset('assets/images/logo-dark.png') }}" alt="" height="28">
                     </span>
                 </a>
 
-                <a href="index.html" class="logo logo-light">
-                    <span class="logo-lg">
-                        <img src="{{ asset('assets/images/logo-light.png') }}" alt="" height="30">
-                    </span>
+                <a href="{{ route('index') }}" class="logo logo-light">
                     <span class="logo-sm">
                         <img src="{{ asset('assets/images/logo-light-sm.png') }}" alt="" height="26">
+                    </span>
+                    <span class="logo-lg">
+                        <img src="{{ asset('assets/images/logo-light.png') }}" alt="" height="30">
                     </span>
                 </a>
             </div>
@@ -28,16 +28,16 @@
                 <i class="bx bx-menu align-middle"></i>
             </button>
 
-            <!-- start page title -->
+            <!-- Start page title -->
             <div class="page-title-box align-self-center d-none d-md-block">
                 <h4 class="page-title mb-0">@yield('title', 'Admin & Dashboard Template')</h4>
             </div>
-            <!-- end page title -->
-
+            <!-- End page title -->
         </div>
 
         <div class="d-flex">
 
+            <!-- Language Switch -->
             <div class="dropdown d-inline-block language-switch ms-2">
                 <button type="button" class="btn header-item" data-bs-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
@@ -45,23 +45,20 @@
                         height="18">
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
-
-                    <!-- item-->
+                    <!-- Item -->
                     <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="eng">
                         <img src="{{ asset('assets/images/flags/us.jpg') }}" alt="user-image" class="me-1" height="12">
                         <span class="align-middle">English</span>
                     </a>
-
-                    <!-- item-->
+                    <!-- Item -->
                     <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="qa">
                         <img src="{{ asset('assets/images/flags/qatar.jpg') }}" alt="user-image" class="me-1" height="12">
                         <span class="align-middle">Arabic</span>
                     </a>
-
-
                 </div>
             </div>
 
+            <!-- Search -->
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item noti-icon" data-bs-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
@@ -80,6 +77,7 @@
                 </div>
             </div>
 
+            <!-- Notifications -->
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item noti-icon"
                     id="page-header-notifications-dropdown-v" data-bs-toggle="dropdown" aria-haspopup="true"
@@ -89,79 +87,56 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu-xl dropdown-menu-end p-0"
                     aria-labelledby="page-header-notifications-dropdown-v">
-                    <div class="p-3">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h5 class="m-0 font-size-15"> Notifications </h5>
-                            </div>
-                            <div class="col-auto">
-                                <a href="#!" class="small fw-semibold text-decoration-underline"> Mark
-                                    all as read</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div data-simplebar style="max-height: 250px;">
-
-                        <a href="#!" class="text-reset notification-item">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0 avatar-sm me-3">
-                                    <span class="avatar-title bg-primary rounded-circle font-size-18">
-                                        <i class="bx bx-cart"></i>
-                                    </span>
-                                </div>
-                                <div class="flex-grow-1">
-                                    <p class="text-muted font-size-13 mb-0 float-end">3 min ago</p>
-                                    <h6 class="mb-1">Your order is placed</h6>
-                                    <div>
-                                        <p class="mb-0">If several languages coalesce the grammar</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                    </div>
-                    <div class="p-2 border-top d-grid">
-                        <a class="btn btn-sm btn-link font-size-14 btn-block text-center"
-                            href="javascript:void(0)">
-                            <i class="uil-arrow-circle-right me-1"></i> <span>View More..</span>
-                        </a>
-                    </div>
+                    <!-- Notifications content -->
+                    <!-- You can add your notifications here -->
                 </div>
             </div>
 
+            <!-- User Dropdown -->
             <div class="dropdown d-inline-block">
+                @if(Auth::check())
                 <button type="button" class="btn header-item user text-start d-flex align-items-center"
                     id="page-header-user-dropdown-v" data-bs-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
-                    <img class="rounded-circle header-profile-user" src="{{ asset('assets/images/users/avater.png') }}"
+                    <img class="rounded-circle header-profile-user" src="{{ asset('assets/images/users/avatar.png') }}"
                         alt="Header Avatar">
-                    <span
-                        class="d-none d-xl-inline-block ms-2 fw-medium font-size-15">aymen  </span>
+                    <span class="d-none d-xl-inline-block ms-2 fw-medium font-size-15">{{ Auth::user()->name }}</span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end pt-0">
                     <div class="p-3 border-bottom">
-                        <h6 class="mb-0">aymen</h6>
-                        <p class="mb-0 font-size-11 text-muted">ayman@brander.qa</p>
+                        <h6 class="mb-0">{{ Auth::user()->name }}</h6>
+                        <p class="mb-0 font-size-11 text-muted">{{ Auth::user()->email }}</p>
                     </div>
-                    <a class="dropdown-item" href="contacts-profile.html"><i
-                            class="mdi mdi-account-circle text-muted font-size-16 align-middle me-2"></i> <span
-                            class="align-middle">Profile</span></a>
-                    <a class="dropdown-item" href="apps-chat.html"><i
+                    <a class="dropdown-item" href="{{ route('profile.edit') }}"><i
+                            class="mdi mdi-account-circle text-muted font-size-16 align-middle me-2"></i>
+                        <span class="align-middle">Profile</span></a>
+                    <a class="dropdown-item" href="#"><i
                             class="mdi mdi-message-text-outline text-muted font-size-16 align-middle me-2"></i>
                         <span class="align-middle">Messages</span></a>
-                    <a class="dropdown-item" href="pages-faqs.html"><i
-                            class="mdi mdi-lifebuoy text-muted font-size-16 align-middle me-2"></i> <span
-                            class="align-middle">Help</span></a>
+                    <a class="dropdown-item" href="#"><i
+                            class="mdi mdi-lifebuoy text-muted font-size-16 align-middle me-2"></i>
+                        <span class="align-middle">Help</span></a>
                     <a class="dropdown-item d-flex align-items-center" href="#"><i
-                            class="mdi mdi-cog-outline text-muted font-size-16 align-middle me-2"></i> <span
-                            class="align-middle me-3">Settings</span></a>
+                            class="mdi mdi-cog-outline text-muted font-size-16 align-middle me-2"></i>
+                        <span class="align-middle me-3">Settings</span></a>
 
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{Auth::logout()}}"><i
-                            class="mdi mdi-logout text-muted font-size-16 align-middle me-2"></i> <span
-                            class="align-middle">Logout</span></a>
+                    <!-- Logout -->
+                    <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="mdi mdi-logout text-muted font-size-16 align-middle me-2"></i>
+                        <span class="align-middle">Logout</span>
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 </div>
+                @else
+                <!-- Login and Register Links -->
+                <a href="{{ route('login') }}" class="btn header-item">Login</a>
+                <a href="{{ route('register') }}" class="btn header-item">Register</a>
+                @endif
             </div>
+            <!-- End User Dropdown -->
         </div>
     </div>
 </header>

@@ -44,7 +44,9 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+        return redirect()->intended(route('index'));
 
-        return redirect(route('index', absolute: false));
+
+        // return redirect(route('index', absolute: false));
     }
 }
