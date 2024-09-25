@@ -34,6 +34,9 @@ class AdsController extends Controller
         // Generate a URL to the stored image
         $validatedData['image'] = asset('storage/' . $path);
 
+        // Add the authenticated user's ID to the data
+        $validatedData['user_id'] = $request->user()->id;
+
         Ad::create($validatedData);
         return redirect()->route('ads.index')->with('success', 'Ad created successfully!');
     }
@@ -57,11 +60,11 @@ class AdsController extends Controller
                 Storage::disk('public')->delete($ad->image);
             }
 
-             // Store the image and get the path
-        $path = $request->file('image')->store('ads', 'public');
+            // Store the image and get the path
+            $path = $request->file('image')->store('ads', 'public');
 
-        // Generate a URL to the stored image
-        $validatedData['image'] = asset('storage/' . $path);
+            // Generate a URL to the stored image
+            $validatedData['image'] = asset('storage/' . $path);
 
         }
 

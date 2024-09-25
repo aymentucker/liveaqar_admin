@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\PostCategory;
 use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
@@ -12,7 +12,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = PostCategory::all();
         return view("categories", compact("categories"));
     }
 
@@ -34,14 +34,18 @@ class CategoriesController extends Controller
             'name_en' => 'required|string|max:255',
         ]);
 
-        Category::create($validatedData);
+          // Add the authenticated user's ID to the data
+          $validatedData['user_id'] = $request->user()->id;
+
+
+          PostCategory::create($validatedData);
         return redirect()->route('categories.index')->with('success', 'Category added successfully!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show(PostCategory $category)
     {
         //
     }
@@ -49,7 +53,7 @@ class CategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
+    public function edit(PostCategory $category)
     {
         //
     }
@@ -57,7 +61,7 @@ class CategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, PostCategory $category)
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
@@ -71,7 +75,7 @@ class CategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy(PostCategory $category)
     {
         $category->delete();
         return redirect()->route('categories.index')->with('success', 'Category deleted successfully!');

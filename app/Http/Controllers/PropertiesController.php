@@ -59,6 +59,7 @@ class PropertiesController extends Controller
             'garages' => 'nullable|integer',
             'area_size' => 'nullable|numeric',
             'featured_video' => 'nullable|url',
+            'virtual_tour_link' => 'nullable|url',
             'type_id' => 'required|exists:property_types,id',
             'property_code' => 'required|string|unique:properties,property_code',
             'phone' => 'required|string',
@@ -70,6 +71,9 @@ class PropertiesController extends Controller
         // Extract statuses from validated data
         $statuses = $validatedData['statuses'];
         unset($validatedData['statuses']);
+
+        // Add the authenticated user's ID to the data
+        $validatedData['user_id'] = $request->user()->id;
 
         // Create the property
         $property = Property::create($validatedData);
@@ -97,6 +101,7 @@ class PropertiesController extends Controller
             'garages' => 'nullable|integer',
             'area_size' => 'nullable|numeric',
             'featured_video' => 'nullable|url',
+            'virtual_tour_link' => 'nullable|url',
             'type_id' => 'required|exists:property_types,id',
             'property_code' => 'required|string|unique:properties,property_code,' . $property->id,
             'phone' => 'required|string',

@@ -9,10 +9,10 @@ class Agency extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'user_id',
         'name',
         'name_en',
         'description',
-
         'description_en',
         'logo',
         'email',
@@ -29,6 +29,10 @@ class Agency extends Model
         'social_media' => 'array',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     public function agents()
     {
         return $this->hasMany(Agent::class);

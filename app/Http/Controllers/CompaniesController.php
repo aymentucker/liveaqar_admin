@@ -53,6 +53,10 @@ class CompaniesController extends Controller
             $validatedData['logo'] = $path;
         }
 
+        // Add the authenticated user's ID to the data
+        $validatedData['user_id'] = $request->user()->id;
+
+
         // Create the company without 'sub_category_ids'
         $company = Company::create($validatedData);
 
@@ -158,6 +162,9 @@ class CompaniesController extends Controller
             $path = $request->file('image')->store('company-categories', 'public');
             $validatedData['image'] = $path;
         }
+
+        // Add the authenticated user's ID to the data
+        $validatedData['user_id'] = $request->user()->id;
 
         // Create the category
         CompanyCategory::create($validatedData);

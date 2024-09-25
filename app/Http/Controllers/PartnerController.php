@@ -31,6 +31,9 @@ class PartnerController extends Controller
 
         $validatedData['image'] = $request->file('image')->store('partners', 'public');
 
+          // Add the authenticated user's ID to the data
+          $validatedData['user_id'] = $request->user()->id;
+
         Partner::create($validatedData);
         return redirect()->route('partners.index')->with('success', 'Partner created successfully!');
     }

@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('agents', function (Blueprint $table) {
             $table->id();
-            $table->string('position')->nullable();
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
             $table->foreignId('agency_id')->constrained('agencies')->onDelete('cascade');
-            $table->string('mobile_number')->nullable();
-            $table->string('whatsapp')->nullable();
+            $table->string('position')->nullable();
             $table->string('language')->nullable();
             $table->string('address')->nullable();
             $table->timestamps();

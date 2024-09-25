@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\PostCategory;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -14,7 +14,7 @@ class PostsController extends Controller
     public function index()
     {
         $posts = Post::all();
-        $categories = Category::all();
+        $categories = PostCategory::all();
         return view('posts', compact('posts', 'categories'));
     }
 
@@ -33,6 +33,9 @@ class PostsController extends Controller
         ]);
 
         $validatedData['featured_image'] = $request->file('featured_image')->store('posts', 'public');
+
+          // Add the authenticated user's ID to the data
+          $validatedData['user_id'] = $request->user()->id;
 
         Post::create($validatedData);
         return redirect()->route('posts.index')->with('success', 'Post created successfully!');

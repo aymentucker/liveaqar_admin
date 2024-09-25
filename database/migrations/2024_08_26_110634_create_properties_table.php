@@ -24,6 +24,7 @@ return new class extends Migration
             $table->foreignId('state_id')->constrained('states');
             $table->string('featured_image')->nullable();
             $table->string('featured_video')->nullable();
+            $table->string('virtual_tour_link')->nullable();
             $table->string('url_link')->nullable();
             $table->json('gallery')->nullable();
             $table->decimal('sell_price', 15, 2)->nullable();

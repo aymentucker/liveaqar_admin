@@ -205,7 +205,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <!-- Address and Property Code -->
+
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label" for="address">Address</label>
@@ -221,36 +221,73 @@
                                 </div>
                             </div>
                             <!-- Prices -->
-                            <div class="col-md-6">
+                            <div class="col-md-2">
                                 <div class="mb-3">
                                     <label class="form-label" for="sell_price">Sell Price</label>
                                     <input type="text" class="form-control" id="sell_price" name="sell_price"
                                         placeholder="Enter Sell Price">
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-2">
                                 <div class="mb-3">
                                     <label class="form-label" for="rent_price">Rent Price</label>
                                     <input type="text" class="form-control" id="rent_price" name="rent_price"
                                         placeholder="Enter Rent Price">
                                 </div>
                             </div>
-                            <!-- Rooms and Bathrooms -->
-                            <div class="col-md-6">
+
+                            <div class="col-md-2">
                                 <div class="mb-3">
                                     <label class="form-label" for="rooms">Rooms</label>
                                     <input type="number" class="form-control" id="rooms" name="rooms"
                                         placeholder="Enter Number of Rooms">
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-2">
                                 <div class="mb-3">
                                     <label class="form-label" for="bathrooms">Bathrooms</label>
                                     <input type="number" class="form-control" id="bathrooms" name="bathrooms"
                                         placeholder="Enter Number of Bathrooms">
                                 </div>
                             </div>
-                            <!-- Phone and Year Built -->
+                            <div class="col-md-2">
+                                <div class="mb-3">
+                                    <label class="form-label" for="garages">Garages</label>
+                                    <input type="number" class="form-control" id="garages" name="garages"
+                                        placeholder="Enter Number of Garages">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="mb-3">
+                                    <label class="form-label" for="area_size">Area Size</label>
+                                    <input type="text" class="form-control" id="area_size" name="area_size"
+                                        placeholder="Enter Area Size">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="mb-3">
+                                    <label class="form-label" for="year_built">Year Built</label>
+                                    <input type="number" class="form-control" id="year_built" name="year_built"
+                                        placeholder="Enter Year Built">
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-5">
+                                <div class="mb-3">
+                                    <label class="form-label" for="featured_video">Featured Video URL</label>
+                                    <input type="url" class="form-control" id="featured_video" name="featured_video"
+                                        placeholder="Enter Featured Video URL">
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="mb-3">
+                                    <label class="form-label" for="virtual_tour_link">Virtual tour URL</label>
+                                    <input type="url" class="form-control" id="virtual_tour_link" name="virtual_tour_link"
+                                        placeholder="Enter Virtual Tour URL">
+                                </div>
+                            </div>
+
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label" for="phone">Phone</label>
@@ -258,36 +295,7 @@
                                         placeholder="Enter Phone Number" required>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label" for="year_built">Year Built</label>
-                                    <input type="number" class="form-control" id="year_built" name="year_built"
-                                        placeholder="Enter Year Built">
-                                </div>
-                            </div>
-                            <!-- Garages and Featured Video -->
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label" for="garages">Garages</label>
-                                    <input type="number" class="form-control" id="garages" name="garages"
-                                        placeholder="Enter Number of Garages">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label" for="featured_video">Featured Video URL</label>
-                                    <input type="url" class="form-control" id="featured_video" name="featured_video"
-                                        placeholder="Enter Featured Video URL">
-                                </div>
-                            </div>
-                            <!-- Area Size and Property Type -->
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label" for="area_size">Area Size</label>
-                                    <input type="text" class="form-control" id="area_size" name="area_size"
-                                        placeholder="Enter Area Size">
-                                </div>
-                            </div>
+
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label" for="type_id">Property Type</label>
@@ -359,6 +367,7 @@
             const yearBuiltInput = document.getElementById('year_built');
             const garagesInput = document.getElementById('garages');
             const featuredVideoInput = document.getElementById('featured_video');
+            const virtualTourLinkInput = document.getElementById('virtual_tour_link');
             const areaSizeInput = document.getElementById('area_size');
             const typeSelect = document.getElementById('type_id');
             const statusCheckboxes = document.querySelectorAll('input[name="statuses[]"]');
@@ -401,6 +410,7 @@
                 yearBuiltInput.value = property.year_built;
                 garagesInput.value = property.garages;
                 featuredVideoInput.value = property.featured_video;
+                virtualTourLinkInput.value = property.virtual_tour_link;
                 areaSizeInput.value = property.area_size;
 
                 // Set selected city and state

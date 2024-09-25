@@ -9,13 +9,17 @@ class Agent extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'position',
+        'user_id',
         'agency_id',
-        'mobile_number',
-        'whatsapp',
+        'position',
         'language',
         'address',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function agency()
     {

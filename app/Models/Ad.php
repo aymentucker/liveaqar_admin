@@ -9,6 +9,7 @@ class Ad extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'user_id',
         'title',
         'title_en',
         'description',
@@ -20,4 +21,9 @@ class Ad extends Model
         'end_date',
         'type',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

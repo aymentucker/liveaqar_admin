@@ -21,6 +21,7 @@ class Property extends Model
         'state_id',
         'featured_image',
         'featured_video',
+        'virtual_tour_link',
         'url_link',
         'gallery',
         'sell_price',
@@ -52,6 +53,11 @@ class Property extends Model
         'sell_price' => 'decimal:2',
         'rent_price' => 'decimal:2',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function property_type()
     {

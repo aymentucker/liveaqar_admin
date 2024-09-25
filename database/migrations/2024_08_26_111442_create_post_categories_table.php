@@ -11,18 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ads', function (Blueprint $table) {
+        Schema::create('post_categories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
-            $table->string('title')->nullable();
-            $table->string('title_en')->nullable();
-            $table->text('description')->nullable();
-            $table->text('description_en')->nullable();
+            $table->string('name');
+            $table->string('name_en');
+
             $table->string('image')->nullable();
-            $table->string('url')->nullable();
-            $table->date('start_date')->nullable();
-            $table->date('end_date')->nullable();
-            $table->enum('type', ['banner', 'interstitial', 'sponsor'])->default('banner');
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ads');
+        Schema::dropIfExists('categories');
     }
 };

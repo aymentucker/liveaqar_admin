@@ -19,6 +19,7 @@ use App\Http\Controllers\AdsController;
 use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\DeviceTokenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,6 +92,11 @@ Route::middleware(['auth'])->group(function () {
     // Resource routes for NotificationController
 
     Route::resource('notifications', NotificationController::class);
+
+    // Post route for DeviceTokenController
+
+    Route::post('/device-tokens', [DeviceTokenController::class, 'store'])->name('device-tokens.store');
+
 
 
     // CityStateController routes for City

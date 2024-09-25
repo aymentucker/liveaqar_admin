@@ -43,6 +43,10 @@ class AgenciesController extends Controller
             $validatedData['logo'] = $path;
         }
 
+          // Add the authenticated user's ID to the data
+          $validatedData['user_id'] = $request->user()->id;
+
+
         Agency::create($validatedData);
         return redirect()->route('agencies.index')->with('success', 'Agency added successfully!');
     }

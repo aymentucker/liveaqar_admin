@@ -2,10 +2,6 @@
 
 @section('title', 'Login | LiveAqar')
 
-   <!-- Session Status -->
-   <x-auth-session-status class="mb-4" :status="session('status')" />
-
-
 @section('content')
 <div class="row justify-content-center my-auto">
     <div class="col-md-8 col-lg-6 col-xl-5">
@@ -40,13 +36,13 @@
 
                         <div class="mb-3">
                             <div class="float-end">
-                                <a href="{{ route('password.request') }}" class="text-muted text-decoration-underline">Forgot password?</a>
+                                <a href="{{ route('auth.forgot-password') }}" class="text-muted text-decoration-underline">Forgot password?</a>
                             </div>
                             <label class="form-label" for="password-input">Password</label>
                             <div class="position-relative auth-pass-inputgroup input-custom-icon">
                                 <span class="bx bx-lock-alt"></span>
                                 <input type="password" class="form-control" id="password-input" name="password" placeholder="Enter password" required>
-                                <button type="button" class="btn btn-link position-absolute h-100 end-0 top-0" id="password-addon">
+                                <button type="button" class="btn btn-link position-absolute h-100 end-0 top-0" id="password-toggle">
                                     <i class="mdi mdi-eye-outline font-size-18 text-muted"></i>
                                 </button>
                             </div>
@@ -63,14 +59,11 @@
                         </div>
 
                         <div class="mt-4 text-center">
-                            <div class="signin-other-title">
-                                <h5 class="font-size-14 mb-3 mt-2 title"> Don't have an account ? </h5>
-                            </div>
-
+                            <h5 class="font-size-14 mb-3 mt-2 title">Don't have an account?</h5>
                         </div>
 
                         <div class="mt-4 text-center">
-                            <p class="mb-0"><a href="{{ route('register') }}" class="fw-medium text-primary"> Signup now </a> </p>
+                            <p class="mb-0"><a href="{{ route('register') }}" class="fw-medium text-primary">Signup now</a></p>
                         </div>
                     </form>
                 </div>
@@ -78,4 +71,22 @@
         </div>
     </div><!-- end col -->
 </div><!-- end row -->
+@endsection
+
+@section('scripts')
+<script>
+document.getElementById('password-toggle').onclick = function() {
+    var passwordInput = document.getElementById('password-input');
+    var passwordIcon = document.getElementById('password-toggle').querySelector('.mdi');
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        passwordIcon.classList.add('mdi-eye-off');
+        passwordIcon.classList.remove('mdi-eye-outline');
+    } else {
+        passwordInput.type = 'password';
+        passwordIcon.classList.add('mdi-eye-outline');
+        passwordIcon.classList.remove('mdi-eye-off');
+    }
+};
+</script>
 @endsection

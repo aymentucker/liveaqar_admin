@@ -34,9 +34,11 @@
                                         </div>
                                     </th>
                                     <th scope="col">ID</th>
+                                    <th scope="col">User Name</th>
+                                    <th scope="col">User Email</th>
                                     <th scope="col">Agency Name</th>
                                     <th scope="col">Position</th>
-                                    <th scope="col">Mobile Number</th>
+                                    <th scope="col">Phone Number</th>
                                     <th scope="col">WhatsApp</th>
                                     <th scope="col">Language</th>
                                     <th scope="col">Address</th>
@@ -53,19 +55,26 @@
                                             </div>
                                         </th>
                                         <td>{{ $agent->id }}</td>
+                                        <td>{{ $agent->user->name }}</td>
+                                        <td>{{ $agent->user->email }}</td>
                                         <td>{{ $agent->agency->name ?? 'No Agency' }}</td>
                                         <td>{{ $agent->position }}</td>
-                                        <td>{{ $agent->mobile_number }}</td>
-                                        <td>{{ $agent->whatsapp ?? 'N/A' }}</td>
+                                        <td>{{ $agent->user->phone }}</td>
+                                        <td>{{ $agent->user->whatsapp ?? 'N/A' }}</td>
                                         <td>{{ $agent->language }}</td>
                                         <td>{{ $agent->address ?? 'N/A' }}</td>
                                         <td>
                                             <ul class="list-inline mb-0">
                                                 <li class="list-inline-item">
                                                     <a href="javascript:void(0);" data-bs-toggle="tooltip"
+   data-bs-placement="top" title="Edit" class="px-2 text-primary" onclick='openModal(@json($agent))'>
+    <i class="bx bx-pencil font-size-18"></i>
+</a>
+
+                                                    {{-- <a href="javascript:void(0);" data-bs-toggle="tooltip"
                                                         data-bs-placement="top" title="Edit" class="px-2 text-primary" onclick="openModal({{ $agent }})">
                                                         <i class="bx bx-pencil font-size-18"></i>
-                                                    </a>
+                                                    </a> --}}
                                                 </li>
                                                 <li class="list-inline-item">
                                                     <form action="{{ route('agents.destroy', $agent->id) }}" method="POST" style="display: inline;">
@@ -100,6 +109,22 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
+                             <!-- User Information -->
+                        <div class="mb-3">
+                            <label class="form-label" for="user-name">User Name</label>
+                            <input type="text" class="form-control" id="user-name" name="user_name" placeholder="Enter User Name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="user-email">User Email</label>
+                            <input type="email" class="form-control" id="user-email" name="user_email" placeholder="Enter User Email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="user-password">User Password</label>
+                            <input type="password" class="form-control" id="user-password" name="user_password" placeholder="Enter User Password">
+                        </div>
+
+                              <!-- Agent Information -->
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label" for="agent-position">Position</label>
@@ -108,8 +133,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label" for="agent-mobile-number">Mobile Number</label>
-                                    <input type="text" class="form-control" placeholder="Enter Mobile Number" id="agent-mobile-number" name="mobile_number" required>
+                                    <label class="form-label" for="agent-mobile-number">Phone Number</label>
+                                    <input type="text" class="form-control" placeholder="Enter Phone Number" id="agent-mobile-number" name="phone" required>
                                 </div>
                             </div>
                         </div>
@@ -163,45 +188,57 @@
 @endsection
 
 @push('scripts')
-    <script>
-        function openModal(agent = null) {
-            const modalTitle = document.getElementById('modal-title');
-            const form = document.getElementById('agent-form');
-            const positionInput = document.getElementById('agent-position');
-            const mobileNumberInput = document.getElementById('agent-mobile-number');
-            const whatsappInput = document.getElementById('agent-whatsapp');
-            const languageInput = document.getElementById('agent-language');
-            const addressInput = document.getElementById('agent-address');
-            const agencyInput = document.getElementById('agent-agency');
+<script>
+    function openModal(agent = null) {
+        const modalTitle = document.getElementById('modal-title');
+        const form = document.getElementById('agent-form');
+        const userNameInput = document.getElementById('user-name');
+        const userEmailInput = document.getElementById('user-email');
+        const userPasswordInput = document.getElementById('user-password');
+        const positionInput = document.getElementById('agent-position');
+        const mobileNumberInput = document.getElementById('agent-mobile-number');
+        const whatsappInput = document.getElementById('agent-whatsapp');
+        const languageInput = document.getElementById('agent-language');
+        const addressInput = document.getElementById('agent-address');
+        const agencyInput = document.getElementById('agent-agency');
 
-            // Reset the form
-            form.reset();
-            const methodInput = form.querySelector('input[name="_method"]');
-            if (methodInput) {
-                methodInput.remove();
-            }
-
-            if (agent) {
-                modalTitle.textContent = 'Edit Agent';
-                form.action = `/agents/${agent.id}`;
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = '_method';
-                input.value = 'PUT';
-                form.appendChild(input);
-                positionInput.value = agent.position;
-                mobileNumberInput.value = agent.mobile_number;
-                whatsappInput.value = agent.whatsapp;
-                languageInput.value = agent.language;
-                addressInput.value = agent.address;
-                agencyInput.value = agent.agency_id;
-            } else {
-                modalTitle.textContent = 'Add New Agent';
-                form.action = '{{ route("agents.store") }}';
-            }
-
-            const modal = new bootstrap.Modal(document.querySelector('.agent-modal'));
-            modal.show();
+        // Reset the form
+        form.reset();
+        const methodInput = form.querySelector('input[name="_method"]');
+        if (methodInput) {
+            methodInput.remove();
         }
-    </script>
+
+        if (agent) {
+            modalTitle.textContent = 'Edit Agent';
+            form.action = `/agents/${agent.id}`;
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = '_method';
+            input.value = 'PUT';
+            form.appendChild(input);
+
+            userNameInput.value = agent.user.name;
+            userEmailInput.value = agent.user.email;
+            userPasswordInput.removeAttribute('required');
+            userPasswordInput.value = '';
+
+            positionInput.value = agent.position;
+            mobileNumberInput.value = agent.phone;
+            whatsappInput.value = agent.whatsapp;
+            languageInput.value = agent.language;
+            addressInput.value = agent.address;
+            agencyInput.value = agent.agency_id;
+        } else {
+            modalTitle.textContent = 'Add New Agent';
+            form.action = '{{ route("agents.store") }}';
+            userPasswordInput.setAttribute('required', 'required');
+            userPasswordInput.value = '';
+        }
+
+        const modal = new bootstrap.Modal(document.querySelector('.agent-modal'));
+        modal.show();
+    }
+</script>
+
 @endpush

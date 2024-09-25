@@ -22,6 +22,17 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
+
+
+                        <div class="mb-3">
+                            <label class="form-label" for="name">Name</label>
+                            <div class="position-relative input-custom-icon">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" value="{{ old('name') }}" required>
+                                <span class="bx bx-user"></span>
+                            </div>
+                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                        </div>
+
                         <div class="mb-3">
                             <label class="form-label" for="useremail">Email</label>
                             <div class="position-relative input-custom-icon">
@@ -32,20 +43,11 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label" for="name">name</label>
-                            <div class="position-relative input-custom-icon">
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" value="{{ old('name') }}" required>
-                                <span class="bx bx-user"></span>
-                            </div>
-                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                        </div>
-
-                        <div class="mb-3">
                             <label class="form-label" for="password">Password</label>
                             <div class="position-relative auth-pass-inputgroup input-custom-icon">
                                 <span class="bx bx-lock-alt"></span>
                                 <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
-                                <button type="button" class="btn btn-link position-absolute h-100 end-0 top-0" id="password-addon">
+                                <button type="button" class="btn btn-link position-absolute h-100 end-0 top-0" id="password-toggle">
                                     <i class="mdi mdi-eye-outline font-size-18 text-muted"></i>
                                 </button>
                             </div>
@@ -57,7 +59,7 @@
                             <div class="position-relative auth-pass-inputgroup input-custom-icon">
                                 <span class="bx bx-lock-alt"></span>
                                 <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirm password" required>
-                                <button type="button" class="btn btn-link position-absolute h-100 end-0 top-0" id="password-addon">
+                                <button type="button" class="btn btn-link position-absolute h-100 end-0 top-0" id="password-confirm-toggle">
                                     <i class="mdi mdi-eye-outline font-size-18 text-muted"></i>
                                 </button>
                             </div>
@@ -76,9 +78,7 @@
                         </div>
 
                         <div class="mt-4 text-center">
-                            <div class="signin-other-title">
-                                <h5 class="font-size-14 mb-3 mt-2 title"> Already have an account? </h5>
-                            </div>
+                            <h5 class="font-size-14 mb-3 mt-2 title">Already have an account?</h5>
                         </div>
 
                         <div class="mt-4 text-center">
@@ -90,4 +90,35 @@
         </div>
     </div><!-- end col -->
 </div><!-- end row -->
+@endsection
+
+@section('scripts')
+<script>
+document.getElementById('password-toggle').onclick = function() {
+    var passwordInput = document.getElementById('password');
+    var passwordIcon = document.getElementById('password-toggle').querySelector('.mdi');
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        passwordIcon.classList.add('mdi-eye-off');
+        passwordIcon.classList.remove('mdi-eye-outline');
+    } else {
+        passwordInput.type = 'password';
+        passwordIcon.classList.add('mdi-eye-outline');
+        passwordIcon.classList.remove('mdi-eye-off');
+    }
+};
+document.getElementById('password-confirm-toggle').onclick = function() {
+    var confirmPasswordInput = document.getElementById('password_confirmation');
+    var confirmPasswordIcon = document.getElementById('password-confirm-toggle').querySelector('.mdi');
+    if (confirmPasswordInput.type === 'password') {
+        confirmPasswordInput.type = 'text';
+        confirmPasswordIcon.classList.add('mdi-eye-off');
+        confirmPasswordIcon.classList.remove('mdi-eye-outline');
+    } else {
+        confirmPasswordInput.type = 'password';
+        confirmPasswordIcon.classList.add('mdi-eye-outline');
+        confirmPasswordIcon.classList.remove('mdi-eye-off');
+    }
+};
+</script>
 @endsection

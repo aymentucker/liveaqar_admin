@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
+use App\Models\PostComment;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -13,7 +13,7 @@ class CommentsController extends Controller
      */
     public function index()
     {
-        $comments = Comment::all();
+        $comments = PostComment::all();
         $posts = Post::all();
         return view("comments", compact("comments","posts"));
     }
@@ -33,7 +33,7 @@ class CommentsController extends Controller
             'email' => 'required|email',
         ]);
 
-        Comment::create($validatedData);
+        PostComment::create($validatedData);
         return redirect()->route('comments.index')->with('success', 'Comment added successfully!');
     }
 
@@ -41,7 +41,7 @@ class CommentsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, PostComment $comment)
     {
         $validatedData = $request->validate([
             'post_id' => 'required|exists:posts,id',
@@ -60,7 +60,7 @@ class CommentsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Comment $comment)
+    public function destroy(PostComment $comment)
     {
         $comment->delete();
         return redirect()->route('comments.index')->with('success', 'Comment deleted successfully!');
