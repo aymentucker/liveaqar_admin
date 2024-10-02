@@ -55,11 +55,49 @@ Route::put('/settings', [SettingsController::class, 'update']);
 Route::get('/ads', [AdsController::class, 'index']);
 
 
-// companies Routes
-Route::get('/companies', [CompaniesController::class, 'index']);
+// // companies Routes
+// Route::get('/companies', [CompaniesController::class, 'index']);
 
-Route::get('/categories', [CompaniesController::class, 'fetchCategory']);
+// Route::get('/categories', [CompaniesController::class, 'fetchCategory']);
 
-Route::get('/companies/{categoryId}', [CompaniesController::class, 'fetchCompaniesCategory']);
+// Route::get('/companies/{categoryId}', [CompaniesController::class, 'fetchCompaniesCategory']);
 
 
+
+// Main Categories, Subcategories, and Companies
+Route::prefix('companies')->group(function () {
+    // Fetch main categories with subcategories and their companies
+    Route::get('/', [CompaniesController::class, 'index']);
+
+    // CRUD operations for companies
+    Route::post('/', [CompaniesController::class, 'store']);
+    Route::get('/{id}', [CompaniesController::class, 'show']);
+    Route::put('/{id}', [CompaniesController::class, 'update']);
+    Route::delete('/{id}', [CompaniesController::class, 'destroy']);
+});
+
+// Categories Routes
+Route::prefix('categories')->group(function () {
+    // Fetch all main categories
+    Route::get('/main', [CompaniesController::class, 'fetchMainCategories']);
+
+    // Fetch subcategories for a main category
+    Route::get('/main/{mainCategoryId}/subcategories', [CompaniesController::class, 'fetchSubcategories']);
+
+    // Fetch companies for a subcategory
+    Route::get('/sub/{subcategoryId}/companies', [CompaniesController::class, 'fetchCompaniesBySubcategory']);
+
+    // CRUD operations for categories
+    Route::get('/', [CompaniesController::class, 'indexCategory']);
+    Route::post('/', [CompaniesController::class, 'storeCategory']);
+    Route::put('/{category}', [CompaniesController::class, 'updateCategory']);
+    Route::delete('/{category}', [CompaniesController::class, 'destroyCategory']);
+});
+
+// Reviews Routes
+Route::prefix('reviews')->group(function () {
+    Route::get('/', [CompaniesController::class, 'indexReview']);
+    Route::post('/', [CompaniesController::class, 'storeReview']);
+    Route::put('/{review}', [CompaniesController::class, 'updateReview']);
+    Route::delete('/{review}', [CompaniesController::class, 'destroyReview']);
+});

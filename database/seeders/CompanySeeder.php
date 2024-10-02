@@ -42,13 +42,17 @@ class CompanySeeder extends Seeder
                     'linkedin' => $faker->url
                 ]),
                 'address' => $faker->address,
+                'user_id' => \App\Models\User::inRandomOrder()->first()->id ?? null, // Assign a random user or null
             ];
 
             // Create the company
             $company = Company::create($companyData);
 
-            // Attach the company to 1 to 3 random sub-categories
-            $randomSubCategoryIds = $faker->randomElements($subCategoryIds, rand(1, 3));
+            // Decide how many categories to attach (e.g., 1 to 5)
+            $numberOfCategories = rand(1, 5);
+            $randomSubCategoryIds = $faker->randomElements($subCategoryIds, $numberOfCategories);
+
+            // Attach the categories
             $company->categories()->attach($randomSubCategoryIds);
         }
     }

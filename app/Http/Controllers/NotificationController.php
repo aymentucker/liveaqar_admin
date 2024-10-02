@@ -23,37 +23,38 @@ class NotificationController extends Controller
             'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
+        // Handle image upload before notification data preparation
+        if ($request->hasFile('image_url')) {
+            $data['image_url'] = $request->file('image_url')->store('notifications', 'public');
+        }
 
-        // Fetch all device tokens
+        // Fetch device tokens
         $deviceTokens = DeviceToken::pluck('device_token')->toArray();
 
         // Prepare notification data
         $notificationData = [
             'title' => $data['title'],
             'body' => $data['body'],
-            'image' => $data['image_url'] ? asset('storage/' . $data['image_url']) : null,
-            'click_action' => 'FLUTTER_NOTIFICATION_CLICK', // For handling click actions in Flutter
+            'image' => isset($data['image_url']) ? asset('storage/' . $data['image_url']) : null,
         ];
 
+        // Prepare data payload
+        $dataPayload = [
+            'click_action' => 'FLUTTER_NOTIFICATION_CLICK',
+            // Add additional data if needed
+        ];
 
-        // Handle image upload
-        if ($request->hasFile('image_url')) {
-            $data['image_url'] = $request->file('image_url')->store('notifications', 'public');
-        }
-
-          // Add the authenticated user's ID to the data
-          $data['user_id'] = $request->user()->id;
-
-
-        Notification::create($data);
         // Send notification
-        $firebaseService->sendNotification($deviceTokens, $notificationData);
+        $firebaseService->sendNotification($deviceTokens, $notificationData, $dataPayload);
+
+        // Save notification to database
+        $data['user_id'] = $request->user()->id;
+        Notification::create($data);
 
         return redirect()->route('notifications.index')->with('success', 'Notification created and sent successfully.');
-
-
-        // return redirect()->route('notifications.index')->with('success', 'Notification created successfully.');
     }
+
+
 
     public function update(Request $request, Notification $notification, FirebaseService $firebaseService)
     {
